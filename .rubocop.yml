@@ -1,0 +1,20 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/*'
+Style/Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'config/environments/development.rb'
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
+Layout/LineLength:
+  Exclude:
+    - 'config/initializers/devise.rb'
