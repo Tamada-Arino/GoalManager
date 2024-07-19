@@ -66,6 +66,8 @@ group :development do
   gem 'html2slim', github: 'slim-template/html2slim'
   gem 'rubocop-rails', require: false
   gem 'rubocop-performance', require: false
+  gem 'slim_lint', require: false
+  gem 'eslint-rails'
 end
 
 group :test do
