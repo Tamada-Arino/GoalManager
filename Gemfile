@@ -62,6 +62,7 @@ group :development do
   # gem "spring"
 
   gem "html2slim", github: "slim-template/html2slim"
+  gem 'rubocop-rails', require: false
 end
 
 group :test do
