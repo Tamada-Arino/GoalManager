@@ -2,6 +2,7 @@ h2
   = t('.title',
     resource: devise_i18n_fix_model_name_case(resource.model_name.human,
     i18n_key: 'registrations.edit.title'))
+= link_to t('devise.shared.links.back'), :back
 = form_for(resource, as: resource_name, url: registration_path(resource_name),
   html: { method: :put }) do |f|
   = render 'devise/shared/error_messages', resource:
@@ -48,12 +49,10 @@ h2
     = f.password_field :current_password, autocomplete: 'current-password'
   .actions
     = f.submit t('.update')
-h3
-  = t('.cancel_my_account')
-div
-  = t('.unhappy')
+div.mt-3
   = button_to t('.cancel_my_account'),
     registration_path(resource_name),
     data: { confirm: t('.are_you_sure'),
-    turbo_confirm: t('.are_you_sure') }, method: :delete
-= link_to t('devise.shared.links.back'), :back
+    turbo_confirm: t('.are_you_sure') }, method: :delete,
+    class: 'button is-danger has-text-white'
+
