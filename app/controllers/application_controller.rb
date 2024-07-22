@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     keys = %i[name avatar]
-    devise_parameter_sanitizer.permit(:sign_up, keys:)
-    devise_parameter_sanitizer.permit(:account_update, keys:)
+    { sign_up: keys, account_update: keys }.each do |action, keys|
+      devise_parameter_sanitizer.permit(action, keys:)
+    end
   end
 end
