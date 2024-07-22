@@ -17,6 +17,9 @@ h2
   .field
     = f.label :avatar
     br
+    - if current_user.avatar.attached?
+      = image_tag current_user.avatar.variant(:thumb)
+    br
     = f.file_field :avatar
   - if devise_mapping.confirmable? && resource.pending_reconfirmation?
     div
