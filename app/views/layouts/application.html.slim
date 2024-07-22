@@ -10,4 +10,8 @@ html
     = javascript_importmap_tags
     = javascript_include_tag 'turbo', type: 'module'
   body
+    - if notice
+      p.notice = notice
+    - if alert
+      p.alert = alert
     = yield
