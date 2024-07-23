@@ -22,13 +22,10 @@ class Goal < ApplicationRecord
   private
 
   def start_date_check
-    validate_date_order(:schedules_end_date)
-    validate_date_order(:end_date)
-  end
+    [:schedules_end_date, :end_date].each do |target_date|
+      next if send(target_date).present? || start_date > send(target_date)
 
-  def validate_date_order(target_date)
-    return unless send(target_date).present? && start_date > send(target_date)
-
-    errors.add(target_date, :start_date_invalid)
+      errors.add(target_date, :start_date_invalid)
+    end
   end
 end
