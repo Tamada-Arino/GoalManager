@@ -1,13 +1,16 @@
-div.is-flex
-  = image_tag current_user.avatar.variant(:thumb) if current_user.avatar.attached?
+.is-flex
+  - if current_user.avatar.attached?
+    = image_tag current_user.avatar.variant(:thumb)
   p #{current_user.name}さん
-div.is-flex
+.is-flex
   = link_to '登録情報編集', edit_user_registration_path, class: 'button'
-  = button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'button'
+  = button_to 'ログアウト', destroy_user_session_path,
+    method: :delete, class: 'button'
 table
   h3 目標一覧
   - @goals.each do |goal|
     tr
-      th= goal.title
+      th = goal.title
       td 開始日: #{goal.start_date}
-      td 終了予定日: #{goal.schedules_end_date if goal.schedules_end_date.present?}
+      - if goal.schedules_end_date.present?
+        td 終了予定日: #{goal.schedules_end_date}
