@@ -14,7 +14,7 @@ class GoalsController < ApplicationController
     if @goal.save
       redirect_to root_path, notice: '目標を作成しました！'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
