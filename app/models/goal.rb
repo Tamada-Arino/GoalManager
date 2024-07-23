@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Goal < ApplicationRecord
   validates :title, presence: true
   validates :start_date, presence: true
@@ -8,7 +10,7 @@ class Goal < ApplicationRecord
       '完了'
     elsif interrupted
       '中断中'
-    elsif start_date > Date.today
+    elsif start_date > Time.zone.today
       '開始前'
     else
       '進行中'
@@ -23,8 +25,8 @@ class Goal < ApplicationRecord
   end
 
   def validate_date_order(target_date)
-    if send(target_date).present? && start_date > send(target_date)
-      errors.add(target_date, :start_date_invalid)
-    end
+    return unless send(target_date).present? && start_date > send(target_date)
+
+    errors.add(target_date, :start_date_invalid)
   end
 end
