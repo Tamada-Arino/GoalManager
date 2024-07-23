@@ -7,7 +7,7 @@ ja:
         title: タイトル
         start_date: 開始日
         schedules_end_date: 終了予定日
-        end_date: 終了日
+        end_date: 達成日
         interrupted: 中断
     errors:
       messages:
