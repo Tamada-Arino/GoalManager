@@ -13,7 +13,7 @@ table
       th = goal.title
       td ステータス: #{goal.status}
       td 開始日: #{goal.start_date}
-      - if goal.schedules_end_date.present?
-        td 終了予定日: #{goal.schedules_end_date}
-      - if goal.end_date.present?
-        td 終了日: #{goal.end_date}
+      td
+        = "終了予定日: #{goal.schedules_end_date}" if goal.schedules_end_date.present?
+      td
+        = "終了日: #{goal.end_date}" if goal.end_date.present?
