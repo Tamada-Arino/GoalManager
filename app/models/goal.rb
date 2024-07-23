@@ -3,6 +3,18 @@ class Goal < ApplicationRecord
   validates :start_date, presence: true
   validate :start_date_check
 
+  def status
+    if end_date.present?
+      '完了'
+    elsif interrupted
+      '中断中'
+    elsif start_date > Date.today
+      '開始前'
+    else
+      '進行中'
+    end
+  end
+
   private
 
   def start_date_check
