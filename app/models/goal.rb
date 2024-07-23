@@ -23,7 +23,7 @@ class Goal < ApplicationRecord
 
   def start_date_check
     [:schedules_end_date, :end_date].each do |target_date|
-      next if send(target_date).present? || start_date > send(target_date)
+      next unless send(target_date).present? && start_date > send(target_date)
 
       errors.add(target_date, :start_date_invalid)
     end
