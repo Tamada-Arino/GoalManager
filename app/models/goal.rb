@@ -5,6 +5,8 @@ class Goal < ApplicationRecord
   validates :start_date, presence: true
   validate :start_date_check
 
+  belongs_to :user
+
   def status
     if end_date.present?
       '完了'
