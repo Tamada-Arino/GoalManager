@@ -1,5 +1,6 @@
 class Goal < ApplicationRecord
   validates :title, presence: true
+  validates :start_date, presence: true
   validate :start_date_check
 
   private
