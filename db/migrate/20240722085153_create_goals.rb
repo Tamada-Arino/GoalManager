@@ -7,6 +7,7 @@ class CreateGoals < ActiveRecord::Migration[7.1]
       t.date :end_date
       t.boolean :interrupted, default: false
       t.string :color
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
