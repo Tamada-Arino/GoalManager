@@ -18,6 +18,9 @@ class GoalsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def goal_params
