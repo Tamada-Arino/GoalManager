@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
   def index
-    @goals = Goals.order(:created_at)
+    @goals = Goal.order(:created_at)
   end
 end
