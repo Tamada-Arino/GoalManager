@@ -14,6 +14,7 @@ table
       td ステータス: #{goal.status}
       td 開始日: #{goal.start_date}
       td
-        = "終了予定日: #{goal.schedules_end_date}" if goal.schedules_end_date.present?
+        - if goal.schedules_end_date.present?
+          = "終了予定日: #{goal.schedules_end_date}"
       td
         = "終了日: #{goal.end_date}" if goal.end_date.present?
