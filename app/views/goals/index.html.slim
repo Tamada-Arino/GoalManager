@@ -5,8 +5,9 @@ div.is-flex
   = link_to '登録情報編集', edit_user_registration_path, class: 'button'
   = button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'button'
 div
+  h3 目標一覧
   - @goals.each do |goal|
     div
-      = goal.title
-      = goal.start_date
-      = goal.schedule_end_date if goal.schedule_end_date.present?
+      h4= goal.title
+      p 開始日: #{goal.start_date}
+      p 終了日: #{goal.schedules_end_date if goal.schedules_end_date.present?}
