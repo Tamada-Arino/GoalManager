@@ -21,6 +21,6 @@ class GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted])
+    params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color])
   end
 end
