@@ -9,7 +9,6 @@ ja:
         schedule_end_date: 終了予定日
         end_date: 終了日
         interrupted: 中断中
-        color: color
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
