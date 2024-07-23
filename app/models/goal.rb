@@ -1,6 +1,5 @@
 class Goal < ApplicationRecord
   validates :title, presence: true
-  validate :start_end_check
   validate :start_date_check
 
   private
@@ -11,7 +10,7 @@ class Goal < ApplicationRecord
   end
 
   def validate_date_order(target_date)
-    if target_date.present? && self.start_date > self.target_date
+    if start_date.present? && send(target_date).present? && start_date > send(target_date)
       errors.add(target_date, :start_date_invalid)
     end
   end
