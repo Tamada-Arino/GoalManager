@@ -12,7 +12,7 @@ class GoalsController < ApplicationController
   def create
     @goal = current_user.goals.new(goal_params)
     if @goal.save
-      redirect_to root_path, notice: '目標を作成しました！'
+      redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
