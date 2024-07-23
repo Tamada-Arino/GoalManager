@@ -6,9 +6,21 @@ class GoalsController < ApplicationController
   end
 
   def new
-    @goal = Goal.new
+    @goal = current_user.goals.new
   end
 
   def create
+    @goal = current_user.goals.new(goal_params)
+    if @goal.save
+      redirect_to root_path, notice: '目標を作成しました！'
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def goal_params
+    params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted])
   end
 end
