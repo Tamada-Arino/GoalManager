@@ -1,5 +1,15 @@
 ja:
   activerecord:
+    models:
+      goal: 目標
+    attributes:
+      goal:
+        title: タイトル
+        start_date: 開始日
+        schedule_end_date: 終了予定日
+        end_date: 終了日
+        interrupted: 中断中
+        color: color
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -110,6 +120,7 @@ ja:
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
       content_type_invalid: "はpngかjpegを使用してください"
+      start_date_invalid: は開始日以前を登録できません
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"
