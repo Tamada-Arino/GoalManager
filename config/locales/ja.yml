@@ -6,7 +6,7 @@ ja:
       goal:
         title: タイトル
         start_date: 開始日
-        schedule_end_date: 終了予定日
+        schedules_end_date: 終了予定日
         end_date: 終了日
         interrupted: 中断
     errors:
