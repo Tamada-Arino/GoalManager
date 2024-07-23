@@ -11,7 +11,7 @@ class Goal < ApplicationRecord
   end
 
   def validate_date_order(target_date)
-    if start_date.present? && send(target_date).present? && start_date > send(target_date)
+    if send(target_date).present? && start_date > send(target_date)
       errors.add(target_date, :start_date_invalid)
     end
   end
