@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :avatar, content_type: ['image/png', 'image/jpeg']
 
+  has_many :goals, dependent: :destroy
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
