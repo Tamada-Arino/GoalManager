@@ -15,8 +15,9 @@ table
         td = f.date_field :schedules_end_date
     .form
       tr
-        td colspan=2
-          = f.radio_button :color, 'red'
+        th ベースカラー
+        td
+          = f.radio_button :color, 'red', checked: true
           = f.label :color_red, '赤'
           = f.radio_button :color, 'green'
           = f.label :color_green, '緑'
