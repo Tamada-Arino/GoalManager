@@ -1,2 +1,12 @@
-h1 Goals#index
-p Find me in app/views/goals/index.html.slim
+div.is-flex
+  = image_tag current_user.avatar.variant(:thumb) if current_user.avatar.attached?
+  p #{current_user.name}さん
+div.is-flex
+  = link_to '登録情報編集', edit_user_registration_path, class: 'button'
+  = button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'button'
+div
+  - @goals.each do |goal|
+    div
+      = goal.title
+      = goal.start_date
+      = goal.schedule_end_date if goal.schedule_end_date.present?
