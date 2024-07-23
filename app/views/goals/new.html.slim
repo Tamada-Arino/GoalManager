@@ -1,0 +1,23 @@
+h3 目標新規作成
+
+= form_with model: @goal, local: true do |f|
+  .form
+    = f.label :title
+    br
+    = f.text_field :title
+  .form
+    = f.label :start_date
+    br
+    = f.date_field :start_date
+  .form
+    = f.label :schedules_end_date
+    = f.date_field :schedules_end_date
+  .form
+    = f.radio_button :color, 'red'
+    = f.label :color_red, '赤'
+    = f.radio_button :color, 'green'
+    = f.label :color_green, '緑'
+    = f.radio_button :color, 'blue'
+    = f.label :color_blue, '青'
+  .form
+    = f.submit '作成する', class: 'button'
