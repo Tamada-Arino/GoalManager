@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Report < ApplicationRecord
   validates :target_date, presence: true, uniqueness: { scope: :goal_id }
   validates :progress_value, presence: true, numericality: { in: 0..100 }
