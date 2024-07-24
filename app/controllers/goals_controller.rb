@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class GoalsController < ApplicationController
+  before_action :set_goal, only: %i[show edit update]
+
   def index
     @goals = current_user.goals.order(:created_at).page(params[:page])
   end
 
-  def show
-    @goal = current_user.goals.find(params[:id])
-  end
+  def show; end
 
   def new
     @goal = current_user.goals.new
@@ -22,12 +22,9 @@ class GoalsController < ApplicationController
     end
   end
 
-  def edit
-    @goal = current_user.goals.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @goal = current_user.goals.find(params[:id])
     if @goal.update(goal_params)
       redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
     else
@@ -36,6 +33,10 @@ class GoalsController < ApplicationController
   end
 
   private
+
+  def set_goal
+    @goal = current_user.goals.find(params[:id])
+  end
 
   def goal_params
     params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color])
