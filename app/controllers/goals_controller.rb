@@ -13,6 +13,8 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.new
   end
 
+  def edit; end
+
   def create
     @goal = current_user.goals.new(goal_params)
     if @goal.save
@@ -21,8 +23,6 @@ class GoalsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-  def edit; end
 
   def update
     if @goal.update(goal_params)
