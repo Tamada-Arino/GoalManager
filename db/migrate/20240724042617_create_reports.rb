@@ -8,5 +8,7 @@ class CreateReports < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :reports, [:goal_id, :target_date], unique: true
   end
 end

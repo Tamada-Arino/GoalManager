@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_042617) do
     t.integer "progress_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["goal_id", "target_date"], name: "index_reports_on_goal_id_and_target_date", unique: true
     t.index ["goal_id"], name: "index_reports_on_goal_id"
   end
 
