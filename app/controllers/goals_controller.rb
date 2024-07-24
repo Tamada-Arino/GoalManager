@@ -27,6 +27,12 @@ class GoalsController < ApplicationController
   end
 
   def update
+    @goal = current_user.goals.find(params[:id])
+    if @goal.update(goal_params)
+      redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
