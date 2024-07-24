@@ -32,3 +32,4 @@ ul
       |  -
       = " #{report.content.truncate(30)}"
 = paginate @reports
+= link_to '作成画面', new_goal_report_path(@goal)
