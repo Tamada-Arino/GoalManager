@@ -121,6 +121,7 @@ ja:
       wrong_length: は%{count}文字で入力してください
       content_type_invalid: "はpngかjpegを使用してください"
       start_date_invalid: は開始日以前を登録できません
+      end_date_invalid: は達成日以降を登録できません
       invalid_color: は赤、緑、青のいずれかから選んでください
     template:
       body: 次の項目を確認してください
