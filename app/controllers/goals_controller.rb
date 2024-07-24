@@ -34,7 +34,7 @@ class GoalsController < ApplicationController
 
   def destroy
     @goal.destroy
-    redirect_to root_path, notice: t('notice.destroy', content: Goal.model_name.human)
+    redirect_to root_path, notice: t('notice.destroy', content: @goal.title)
   end
 
   private
