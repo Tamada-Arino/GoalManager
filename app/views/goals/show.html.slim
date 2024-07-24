@@ -25,4 +25,9 @@ table
 h3 日報一覧
 ul
   - @reports.each do |report|
-    li #{report.target_date} - #{report.progress_value} - #{report.content.truncate(30)}
+    li
+      = report.target_date
+      |  -
+      = " #{report.progress_value}"
+      |  -
+      = " #{report.content.truncate(30)}"
