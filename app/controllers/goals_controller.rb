@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GoalsController < ApplicationController
-  before_action :set_goal, only: %i[show edit update]
+  before_action :set_goal, only: %i[show edit update destroy]
 
   def index
     @goals = current_user.goals.order(:created_at).page(params[:page])
@@ -30,6 +30,11 @@ class GoalsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @goal.destroy
+    redirect_to root_path, notice: t('notice.destroy', content: @goal.title)
   end
 
   private
