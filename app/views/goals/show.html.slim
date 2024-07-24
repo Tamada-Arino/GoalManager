@@ -1,5 +1,5 @@
 h3 目標詳細
-= link_to '戻る', :back
+= link_to '目標一覧へ戻る', root_path
 table
   tr
     th タイトル
@@ -21,3 +21,4 @@ table
   tr
     th ベースカラー
     td = @goal.color
+= link_to '編集する', edit_goal_path(@goal), class: 'button'

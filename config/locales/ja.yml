@@ -9,6 +9,7 @@ ja:
         schedules_end_date: 終了予定日
         end_date: 達成日
         interrupted: 中断
+        color: ベースカラー
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -120,6 +121,7 @@ ja:
       wrong_length: は%{count}文字で入力してください
       content_type_invalid: "はpngかjpegを使用してください"
       start_date_invalid: は開始日以前を登録できません
+      invalid_color: は赤、緑、青のいずれかから選んでください
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"
@@ -132,6 +134,7 @@ ja:
       update: 更新する
   notice:
     create: "%{content}を作成しました！"
+    update: "%{content}を更新しました！"
   number:
     currency:
       format:
