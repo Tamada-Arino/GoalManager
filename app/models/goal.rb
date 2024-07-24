@@ -4,7 +4,7 @@ class Goal < ApplicationRecord
   validates :title, presence: true
   validates :start_date, presence: true
   validates :color, presence: true
-  validate :
+  validate :color_check
   validate :start_date_check
 
   belongs_to :user
