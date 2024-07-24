@@ -22,6 +22,12 @@ class GoalsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   private
 
   def goal_params
