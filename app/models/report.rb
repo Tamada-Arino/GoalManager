@@ -1,3 +1,3 @@
 class Report < ApplicationRecord
-  belongs_to :goal_id
+  belongs_to :goal
 end

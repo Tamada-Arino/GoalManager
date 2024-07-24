@@ -8,6 +8,7 @@ class Goal < ApplicationRecord
   validate :start_date_check
 
   belongs_to :user
+  has_many :reports, dependent: :destroy
 
   def status
     if end_date.present?
