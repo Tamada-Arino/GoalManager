@@ -1,5 +1,5 @@
 class Report < ApplicationRecord
-  validates :target_date, presence: true
+  validates :target_date, presence: true, uniqueness: { scope: :goal_id }
   validates :progress_value, presence: true, numericality: { in: 0..100 }
   validate :progress_date_check
 
