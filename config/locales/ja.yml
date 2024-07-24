@@ -132,6 +132,7 @@ ja:
       update: 更新する
   notice:
     create: "%{content}を作成しました！"
+    update: "%{content}を更新しました！"
   number:
     currency:
       format:
