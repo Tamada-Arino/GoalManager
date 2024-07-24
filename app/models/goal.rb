@@ -3,6 +3,8 @@
 class Goal < ApplicationRecord
   validates :title, presence: true
   validates :start_date, presence: true
+  validates :color, presence: true
+  validate :
   validate :start_date_check
 
   belongs_to :user
@@ -27,5 +29,12 @@ class Goal < ApplicationRecord
 
       errors.add(target_date, :start_date_invalid)
     end
+  end
+
+  def color_check
+    colors = ['red', 'green', 'blue']
+    return if colors.include?(color)
+
+    errors.add(color, :invalid_color)
   end
 end
