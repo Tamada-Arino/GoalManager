@@ -135,6 +135,7 @@ ja:
   notice:
     create: "%{content}を作成しました！"
     update: "%{content}を更新しました！"
+    destroy: "%{content}を削除しました"
   number:
     currency:
       format:
