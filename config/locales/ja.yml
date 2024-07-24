@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       goal: 目標
+      report: 日報
     attributes:
       goal:
         title: タイトル
@@ -10,6 +11,10 @@ ja:
         end_date: 達成日
         interrupted: 中断
         color: ベースカラー
+      report:
+        content: 本文
+        target_date: 日付
+        progress_value: 達成度
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
