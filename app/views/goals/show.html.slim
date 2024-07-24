@@ -1,0 +1,23 @@
+h3 目標詳細
+= link_to '戻る', :back
+table
+  tr
+    th タイトル
+    td = @goal.title
+  tr
+    th ステータス
+    td = @goal.status
+  tr
+    th 開始日
+    td = @goal.start_date
+  - if @goal.schedules_end_date.present?
+    tr
+      th 終了予定日
+      td = @goal.schedules_end_date
+  - if @goal.end_date.present?
+    tr
+      th 達成日
+      td = @goal.end_date
+  tr
+    th ベースカラー
+    td = @goal.color

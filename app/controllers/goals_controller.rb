@@ -5,6 +5,10 @@ class GoalsController < ApplicationController
     @goals = current_user.goals.order(:created_at).page(params[:page])
   end
 
+  def show
+    @goal = current_user.goals.find(params[:id])
+  end
+
   def new
     @goal = current_user.goals.new
   end

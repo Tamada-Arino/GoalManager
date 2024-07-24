@@ -2,6 +2,6 @@
 
 Rails.application.routes.draw do
   root to: 'goals#index'
-  resources :goals, only: %i[new create]
+  resources :goals, only: %i[new create show]
   devise_for :users
 end
