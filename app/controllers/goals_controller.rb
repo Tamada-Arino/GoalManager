@@ -7,7 +7,9 @@ class GoalsController < ApplicationController
     @goals = current_user.goals.order(:created_at).page(params[:page])
   end
 
-  def show; end
+  def show
+    @reports = @goal.reports.order(target_date: :DESC).page(params[:page])
+  end
 
   def new
     @goal = current_user.goals.new
