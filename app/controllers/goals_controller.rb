@@ -8,7 +8,7 @@ class GoalsController < ApplicationController
   end
 
   def show
-    @reports = @goal.reports.order(target_date: :DESC)
+    @reports = @goal.reports.order(target_date: :DESC).page(params[:page])
   end
 
   def new
