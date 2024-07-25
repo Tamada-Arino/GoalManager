@@ -1,2 +1,20 @@
-h1 Goals::Reports#new
-p Find me in app/views/goals/reports/new.html.slim
+h3 日報作成
+= render 'shared/errors', obj: @report
+= form_with model: [@goal, @report], local: true do |f|
+  table
+    .form
+      tr
+        th = f.label :target_date
+        td = f.date_field :target_date, value: Time.zone.today
+    .form
+      tr
+        th = f.label :progress_value
+        td = f.range_field :progress_value, in: 0..100
+    .form
+      tr
+        th = f.label :content
+        td = f.text_area :content, rows: 5
+    .form
+      tr
+        td colspan=2
+          = f.submit nil, class: 'button'
