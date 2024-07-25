@@ -1,3 +1,5 @@
+- content_for :js do
+  = javascript_import_module_tag 'change_slider'
 h3 日報作成
 = render 'shared/errors', obj: @report
 = form_with model: [@goal, @report], local: true do |f|
