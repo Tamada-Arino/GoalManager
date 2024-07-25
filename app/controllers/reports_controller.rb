@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   def new
     @goal = current_user.goals.find(params[:goal_id])
