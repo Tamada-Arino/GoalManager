@@ -9,7 +9,9 @@ h3 日報作成
     .form
       tr
         th = f.label :progress_value
-        td = f.range_field :progress_value, in: 0..100
+        td
+          = f.range_field :progress_value, in: 0..100, id: 'range_slider'
+          span#slider_value 50
     .form
       tr
         th = f.label :content
@@ -18,3 +20,5 @@ h3 日報作成
       tr
         td colspan=2
           = f.submit nil, class: 'button'
+script type="module"
+  | import "change_slider";
