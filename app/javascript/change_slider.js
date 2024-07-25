@@ -1,4 +1,4 @@
-document.addEventListener("turbo:load", function() {
+document.addEventListener('DOMContentLoaded', function() {
   const slider = document.querySelector('#range_slider');
   const output = document.querySelector('#slider_value');
 
