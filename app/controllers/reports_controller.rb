@@ -31,6 +31,13 @@ class ReportsController < ApplicationController
     end
   end
 
+  def destroy
+    @goal = current_user.goals.find(params[:goal_id])
+    @report = @goal.reports.find(params[:id])
+    @report.destroy
+    redirect_to @goal, notice: t('notice.destroy', content: Report.model_name.human)
+  end
+
   private
 
   def report_params
