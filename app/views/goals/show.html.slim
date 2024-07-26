@@ -45,5 +45,6 @@ ul
               tr
                 td colspan=2
                   = report.content.truncate(30)
+            = link_to '編集する', edit_goal_report_path(@goal.id, report), class: 'button'
         button.modal-close.is-large aria-label="close"
 = paginate @reports
