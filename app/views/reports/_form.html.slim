@@ -9,9 +9,10 @@
       tr
         th = f.label :progress_value
         td
+          - progress_value = f.object.progress_value || 50
           = f.range_field :progress_value, in: 0..100, id: 'range_slider',
-            value: f.object.progress_value || 50
-          span#slider_value = f.object.progress_value || 50
+            value: progress_value
+          span#slider_value = progress_value
     .form
       tr
         th = f.label :content
