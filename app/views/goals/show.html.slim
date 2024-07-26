@@ -29,18 +29,21 @@ h3 日報一覧
 ul
   - @reports.each do |report|
     li
-      = report.target_date
-      |  -
-      = " #{report.progress_value}"
-      |  -
-      = " #{report.content.truncate(30)}"
+      button.js-modal-trigger data-target="report-modal-#{report.id}"
+        = report.target_date
+      div.modal id="report-modal-#{report.id}"
+        .modal-background
+        .modal-content
+          .box
+            table
+              tr
+                th 実行日
+                td = report.target_date
+              tr
+                th 達成度
+                td = report.progress_value
+              tr
+                td colspan=2
+                  = report.content.truncate(30)
+        button.modal-close.is-large aria-label="close"
 = paginate @reports
-button.js-modal-trigger data-target="report-modal"
-  | モーダルのテスト
-.modal
-#report-modal.modal
-  .modal-background
-  .modal-content
-    .box
-      p モーダルのコンテンツ
-  button.modal-close.is-large aria-label="close"
