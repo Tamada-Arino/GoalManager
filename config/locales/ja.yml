@@ -13,7 +13,7 @@ ja:
         color: ベースカラー
       report:
         content: 本文
-        target_date: 日付
+        target_date: 実行日
         progress_value: 達成度
     errors:
       messages:
