@@ -23,6 +23,7 @@ table
     td = @goal.color
 = link_to '編集する', edit_goal_path(@goal), class: 'button'
 h3 日報一覧
+= link_to '日報作成', new_goal_report_path(@goal), class: 'button'
 ul
   - @reports.each do |report|
     li
