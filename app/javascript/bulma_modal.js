@@ -25,7 +25,7 @@ document.addEventListener('turbo:load', () => {
   });
 
   // Add a click event on various child elements to close the parent modal
-  (document.querySelectorAll('.modal-background, .modal-close, .button') || []).forEach(($close) => {
+  (document.querySelectorAll('.modal-background, .modal-close') || []).forEach(($close) => {
     const $target = $close.closest('.modal');
 
     $close.addEventListener('click', () => {
