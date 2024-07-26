@@ -3,3 +3,7 @@
 h3 日報編集
 = render 'shared/errors', obj: @report
 = render 'form', models: [@goal, @report]
+= link_to '削除する', goal_report_path(@goal.id, @report),
+  data: { turbo_method: :delete,
+  turbo_confirm: 'この日報を削除してもよろしいですか？' },
+  class: 'button is-danger has-text-white'
