@@ -1,3 +1,5 @@
+- content_for :js do
+  = javascript_import_module_tag 'bulma_modal'
 h3 目標詳細
 = link_to '目標一覧へ戻る', root_path
 table
@@ -33,3 +35,12 @@ ul
       |  -
       = " #{report.content.truncate(30)}"
 = paginate @reports
+button.js-modal-trigger data-target="report-modal"
+  | モーダルのテスト
+.modal
+#report-modal.modal
+  .modal-background
+  .modal-content
+    .box
+      p モーダルのコンテンツ
+  button.modal-close.is-large aria-label="close"
