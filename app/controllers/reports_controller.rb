@@ -6,6 +6,11 @@ class ReportsController < ApplicationController
     @report = @goal.reports.new
   end
 
+  def edit
+    @goal = current_user.goals.find(params[:goal_id])
+    @report = @goal.reports.find(params[:id])
+  end
+
   def create
     @goal = current_user.goals.find(params[:goal_id])
     @report = @goal.reports.new(report_params)
@@ -14,11 +19,6 @@ class ReportsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
-    @goal = current_user.goals.find(params[:goal_id])
-    @report = @goal.reports.find(params[:id])
   end
 
   def update
