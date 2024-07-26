@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   root to: 'goals#index'
   resources :goals do
-    resources :reports, only: %i[new create]
+    resources :reports, only: %i[new create edit update]
   end
   devise_for :users
 end
