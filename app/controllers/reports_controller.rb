@@ -17,6 +17,8 @@ class ReportsController < ApplicationController
   end
 
   def edit
+    @goal = current_user.goals.find(params[:goal_id])
+    @report = @goal.reports.find(params[:id])
   end
 
   def update
