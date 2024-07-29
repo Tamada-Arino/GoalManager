@@ -11,7 +11,8 @@ table.calendar_table
         - elsif date == 5
           td.date_cell
         - else
-          td.date_cell style="background-color: #{@goal.color};" class="progress_#{date}"
+          td.date_cell [style="background-color: #{@goal.color};"
+            class="progress_#{date}"]
 table
   tr
     th タイトル
