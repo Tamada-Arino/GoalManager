@@ -28,29 +28,39 @@ class Goal < ApplicationRecord
     reports = self.reports.where(target_date: start_date..last_date)
                   .select(:target_date, :progress_value)
                   .index_by(&:target_date)
-    calender = []
 
     if range == 2.months
-      week = []
-      week += [''] * start_date.wday
-
-      (start_date..last_date).each do |date|
-        week << progress_number(reports[date]&.progress_value)
-        if date.saturday? || date == last_date
-          calender << week
-          week = []
-        end
-      end
+      progress_table(start_date, last_date, reports)
     else
-      (start_date..last_date).each do |date|
-        calender << progress_number(reports[date]&.progress_value)
-      end
+      progress_line(start_date, last_date, reports)
     end
-
-    calender
   end
 
   private
+
+  def progress_table(start_date, last_date, reports)
+    calendar = []
+    week = initialize_week(start_date.wday)
+
+    (start_date..last_date).each do |date|
+      week << progress_number(reports[date]&.progress_value)
+      if date.saturday? || date == last_date
+        calendar << week
+        week = []
+      end
+    end
+    calendar
+  end
+
+  def initialize_week(start_date)
+    [''] * start_date
+  end
+
+  def progress_line(start_date, last_date, reports)
+    (start_date..last_date).map do |date|
+      progress_number(reports[date]&.progress_value)
+    end
+  end
 
   def progress_number(progress_value)
     return 5 if progress_value.nil?
