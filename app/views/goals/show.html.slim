@@ -2,6 +2,21 @@
   = javascript_import_module_tag 'bulma_modal'
 h3 目標詳細
 = link_to '目標一覧へ戻る', root_path
+table.calendar_table
+  - @goal.generate_calender(2.months).each do |week|
+    tr
+      - week.each do |date|
+        - if date.blank?
+          td
+        - else
+          td class="date_cell #{@goal.color} progress_#{date}"
+table.calender_table
+  tr
+    td 達成度
+    td 高
+    - (1..5).each do |num|
+      td class="date_cell #{@goal.color} progress_#{num}"
+    td 低
 table
   tr
     th タイトル
