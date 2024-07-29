@@ -23,26 +23,22 @@ class Goal < ApplicationRecord
   end
 
   def generate_calender(range)
-    last_date = end_date || Time.zone.today
-    start_date = [last_date - range, self.start_date].max
+    range_last_date = end_date || Time.zone.today
+    range_start_date = [range_last_date - range, self.start_date].max
     reports = self.reports.where(target_date: start_date..last_date)
                   .select(:target_date, :progress_value)
                   .index_by(&:target_date)
 
-    if range == 2.months
-      progress_table(start_date, last_date, reports)
-    else
-      progress_line(start_date, last_date, reports)
-    end
+      progress_table(range_start_date, range_last_date, reports)
   end
 
   private
 
-  def progress_table(start_date, last_date, reports)
+  def progress_table(range_start_date, range_last_date, reports)
     calendar = []
     week = initialize_week(start_date.wday)
 
-    (start_date..last_date).each do |date|
+    (range_start_date..range_last_date).each do |date|
       week << progress_number(reports[date]&.progress_value)
       if date.saturday? || date == last_date
         calendar << week
