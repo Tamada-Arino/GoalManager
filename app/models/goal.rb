@@ -22,49 +22,7 @@ class Goal < ApplicationRecord
     end
   end
 
-  def generate_calender(range)
-    range_last_date = end_date || Time.zone.today
-    range_start_date = [range_last_date - range, self.start_date].max
-    target_reports = self.reports.where(target_date: start_date..last_date)
-                  .select(:target_date, :progress_value)
-                  .index_by(&:target_date)
-
-      progress_table(range_start_date, range_last_date, target_reports)
-  end
-
   private
-
-  def progress_table(range_start_date, range_last_date, target_reports)
-    calendar = []
-    week = initialize_week(start_date.wday)
-
-    (range_start_date..range_last_date).each do |date|
-      week << progress_number(reports[date]&.progress_value)
-      if date.saturday? || date == last_date
-        calendar << week
-        week = []
-      end
-    end
-    calendar
-  end
-
-  def initialize_week(start_date)
-    [''] * start_date
-  end
-
-  def progress_number(progress_value)
-    return 5 if progress_value.nil?
-
-    if progress_value >= 75
-      1
-    elsif progress_value >= 50
-      2
-    elsif progress_value >= 25
-      3
-    else
-      4
-    end
-  end
 
   def start_date_check
     %i[schedules_end_date end_date].each do |target_date|
