@@ -8,9 +8,13 @@
   border-collapse: separate;
   border-spacing: 2px;
 }
+.table_text {
+  font-size: 0.8em;
+  writing-mode:horizontal-tb;
+}
 .date_cell {
-  width: 1em;
-  height: 1em;
+  width: 1.2em;
+  height: 1.2em;
   border: 1px solid #bbb;
   border-radius: 4px;
   background-color: #eee;
