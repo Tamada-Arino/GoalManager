@@ -23,11 +23,11 @@ class Goal < ApplicationRecord
   end
 
   def generate_calender(range)
-    last_date = self.end_date || Time.zone.today
+    last_date = end_date || Time.zone.today
     start_date = [last_date - range, self.start_date].max
     reports = self.reports.where(target_date: start_date..last_date)
-              .select(:target_date, :progress_value)
-              .index_by(&:target_date)
+                  .select(:target_date, :progress_value)
+                  .index_by(&:target_date)
     calender = []
 
     if range == 2.months
@@ -54,6 +54,7 @@ class Goal < ApplicationRecord
 
   def progress_number(progress_value)
     return 5 if progress_value.nil?
+
     if progress_value >= 75
       1
     elsif progress_value >= 50
