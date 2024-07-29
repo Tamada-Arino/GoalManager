@@ -25,16 +25,16 @@ class Goal < ApplicationRecord
   def generate_calender(range)
     range_last_date = end_date || Time.zone.today
     range_start_date = [range_last_date - range, self.start_date].max
-    reports = self.reports.where(target_date: start_date..last_date)
+    target_reports = self.reports.where(target_date: start_date..last_date)
                   .select(:target_date, :progress_value)
                   .index_by(&:target_date)
 
-      progress_table(range_start_date, range_last_date, reports)
+      progress_table(range_start_date, range_last_date, target_reports)
   end
 
   private
 
-  def progress_table(range_start_date, range_last_date, reports)
+  def progress_table(range_start_date, range_last_date, target_reports)
     calendar = []
     week = initialize_week(start_date.wday)
 
@@ -50,12 +50,6 @@ class Goal < ApplicationRecord
 
   def initialize_week(start_date)
     [''] * start_date
-  end
-
-  def progress_line(start_date, last_date, reports)
-    (start_date..last_date).map do |date|
-      progress_number(reports[date]&.progress_value)
-    end
   end
 
   def progress_number(progress_value)
