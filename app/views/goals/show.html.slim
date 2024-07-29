@@ -8,15 +8,10 @@ table.calendar_table
       - week.each do |date|
         - if date.blank?
           td
+        - elsif date == 5
+          td.date_cell
         - else
-          td class="date_cell #{@goal.color} progress_#{date}"
-table.calender_table
-  tr
-    td 達成度
-    td 高
-    - (1..5).each do |num|
-      td class="date_cell #{@goal.color} progress_#{num}"
-    td 低
+          td.date_cell style="background-color: #{@goal.color};" class="progress_#{date}"
 table
   tr
     th タイトル
