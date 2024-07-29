@@ -3,6 +3,9 @@
 h3 目標詳細
 = link_to '目標一覧へ戻る', root_path
 table.calendar_table
+  tr
+    - weekday.each do |wday|
+      td.table_text = wday
   - @calendar.each do |week|
     tr
       - week.each do |date|
