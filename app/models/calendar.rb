@@ -1,15 +1,15 @@
-class Calender
-  attr_reader :goal :range
+class Calendar
+  attr_reader :goal, :range
 
   def initialize(goal, range)
     @goal = goal
     @range = range
   end
 
-  def generate_calender
+  def generate_calendar
     range_last_date = @goal.end_date || Time.zone.today
     range_start_date = [range_last_date - @range, @goal.start_date].max
-    target_reports = @goal.reports.where(target_date: range_start_date..rangelast_date)
+    target_reports = @goal.reports.where(target_date: range_start_date..range_last_date)
                   .select(:target_date, :progress_value)
                   .index_by(&:target_date)
 
@@ -24,7 +24,7 @@ class Calender
 
     (range_start_date..range_last_date).each do |date|
       week << progress_number(target_reports[date]&.progress_value)
-      if date.saturday? || date == last_date
+      if date.saturday? || date == range_last_date
         calendar << week
         week = []
       end
