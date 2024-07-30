@@ -3,7 +3,7 @@
 h3 目標詳細
 = link_to '目標一覧へ戻る', root_path
 table.calendar_table
-  - @goal.generate_calender(2.months).each do |week|
+  - @calendar.each do |week|
     tr
       - week.each do |date|
         - if date.blank?
