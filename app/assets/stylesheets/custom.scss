@@ -18,16 +18,31 @@
   border: 1px solid #bbb;
   border-radius: 4px;
   background-color: #eee;
+  position: relative;
+}
+.date_bubble {
+  font-size: 0.75em;
+  writing-mode: horizontal-tb;
+  position: absolute;
+  display: none;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 1);
+  width: max-content;
+  left: 0;
+  transform: translateX(-100%);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.date_cell:hover {
+  filter: none;
+  filter: brightness(1.2)
+}
+.date_cell:hover .date_bubble {
+  display: block;
 }
 .progress_4 {
   filter: brightness(0.7);
 }
 .progress_3 {
   filter: brightness(1);
-}
-.progress_2 {
-  opacity: 0.6;
-}
-.progress_1 {
-  opacity: 0.3;
 }
