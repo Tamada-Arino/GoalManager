@@ -10,6 +10,8 @@ table.calendar_table
     tr
       - week.each do |date|
         td style="#{ date[:style] }" class="#{ date[:class] }"
+          - if date[:target_date].present?
+            p.date_bubble = date[:target_date]
 table
   tr
     th ステータス
