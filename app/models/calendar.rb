@@ -4,42 +4,22 @@ class Calendar
   def initialize(goal, range)
     @goal = goal
     @range = range
+    @range_last_date = @goal.end_date || Time.zone.today
+    @range_start_date = [@range_last_date - @range, @goal.start_date].max
+    @target_reports = @goal.reports
+                          .where(target_date: @range_start_date..range_last_date)
+                          .select(:target_date, :progress_value)
+                          .index_by(&:target_date)
   end
 
   def generate_calendar
-    range_last_date = @goal.end_date || Time.zone.today
-    range_start_date = [range_last_date - @range, @goal.start_date].max
-    target_reports = @goal.reports
-                          .where(target_date: range_start_date..range_last_date)
-                          .select(:target_date, :progress_value)
-                          .index_by(&:target_date)
-
-    progress_table(range_start_date, range_last_date, target_reports)
-  end
-
-  def generate_line
-    range_last_date = @goal.end_date || Time.zone.today
-    range_start_date = [range_last_date - @range, @goal.start_date].max
-    target_reports = @goal.reports
-                          .where(target_date: range_start_date..range_last_date)
-                          .select(:target_date, :progress_value)
-                          .index_by(&:target_date)
-
-    progress_line(range_start_date, range_last_date, target_reports)
-  end
-
-  private
-
-  attr_reader :goal, :range
-
-  def progress_table(range_start_date, range_last_date, target_reports)
     calendar = []
-    week = initialize_week(range_start_date.wday)
+    week = initialize_week(@range_start_date.wday)
 
-    (range_start_date..range_last_date).each do |date|
-      week << target_date_class_and_style(target_reports[date]&.progress_value)
+    (@range_start_date..@range_last_date).each do |date|
+      week << target_date_class_and_style(@target_reports[date]&.progress_value)
 
-      if date.saturday? || date == range_last_date
+      if date.saturday? || date == @range_last_date
         calendar << week
         week = []
       end
@@ -47,14 +27,18 @@ class Calendar
     calendar
   end
 
-  def progress_line(range_start_date, range_last_date, target_reports)
+  def generate_line
     calendar = []
-    (range_start_date..range_last_date).each do |date|
-      calendar << target_date_class_and_style(target_reports[date]&.progress_value)
+    (@range_start_date..@range_last_date).each do |date|
+      calendar << target_date_class_and_style(@target_reports[date]&.progress_value)
     end
 
     calendar
   end
+
+  private
+
+  attr_reader :goal, :range, :range_last_date, :range_start_date, :target_reports
 
   def target_date_class_and_style(progress_value)
     class_with_style = { class: 'date_cell' }
