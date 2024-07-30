@@ -37,12 +37,13 @@ class Calendar
   end
 
   def target_date_class_and_style(value)
-    if value == 5
-      { class: 'date_cell' }
-    else
-      { class: "date_cell progress_#{value}",
-        style: "background-color: #{@goal.color};" }
+    class_with_style = { class: 'date_cell' }
+    if value != 5
+      class_with_style[:class] += " progress_#{value}"
+      class_with_style[:style] = "background-color: #{@goal.color};"
     end
+
+    class_with_style
   end
 
   def initialize_week(wday)
