@@ -26,7 +26,7 @@ class Calendar
     week = initialize_week(range_start_date.wday)
 
     (range_start_date..range_last_date).each do |date|
-      week << target_date_class_and_style(progress_number(target_reports[date]&.progress_value))
+      week << target_date_class_and_style(target_reports[date]&.progress_value)
 
       if date.saturday? || date == range_last_date
         calendar << week
@@ -36,10 +36,20 @@ class Calendar
     calendar
   end
 
-  def target_date_class_and_style(value)
+  def progress_line(range_start_date, range_last_date, target_reports)
+    calendar = []
+    (range_start_date..range_last_date).each do |date|
+      calendar << target_date_class_and_style(target_reports[date]&.progress_value)
+    end
+
+    calendar
+  end
+
+  def target_date_class_and_style(progress_value)
     class_with_style = { class: 'date_cell' }
-    if value != 5
-      class_with_style[:class] += " progress_#{value}"
+    if progress_value.present?
+      status_number = (progress_value - 1) / 25 + 1
+      class_with_style[:class] += " progress_#{status_number}"
       class_with_style[:style] = "background-color: #{@goal.color};"
     end
 
@@ -48,23 +58,5 @@ class Calendar
 
   def initialize_week(wday)
     [{}] * wday
-  end
-
-  def progress_number(progress_value)
-    return 5 if progress_value.nil?
-
-    if progress_value >= progress_value_evaluation[:GOOD]
-      1
-    elsif progress_value >= progress_value_evaluation[:SOSO]
-      2
-    elsif progress_value >= progress_value_evaluation[:BAD]
-      3
-    else
-      4
-    end
-  end
-
-  def progress_value_evaluation
-    { GOOD: 75, SOSO: 50, BAD: 25 }
   end
 end
