@@ -53,14 +53,18 @@ class Calendar
   def progress_number(progress_value)
     return 5 if progress_value.nil?
 
-    if progress_value >= 75
+    if progress_value >= progress_value_evaluation[:GOOD]
       1
-    elsif progress_value >= 50
+    elsif progress_value >= progress_value_evaluation[:SOSO]
       2
-    elsif progress_value >= 25
+    elsif progress_value >= progress_value_evaluation[:BAD]
       3
     else
       4
     end
+  end
+
+  def progress_value_evaluation
+    { GOOD: 75, SOSO: 50, BAD: 25 }
   end
 end
