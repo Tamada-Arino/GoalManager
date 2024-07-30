@@ -26,7 +26,7 @@ class Calendar
     week = initialize_week(range_start_date.wday)
 
     (range_start_date..range_last_date).each do |date|
-      week << class_and_style(progress_number(target_reports[date]&.progress_value))
+      week << target_date_class_and_style(progress_number(target_reports[date]&.progress_value))
 
       if date.saturday? || date == range_last_date
         calendar << week
@@ -36,7 +36,7 @@ class Calendar
     calendar
   end
 
-  def class_and_style(value)
+  def target_date_class_and_style(value)
     if value == 5
       { class: 'date_cell',
         style: '' }
