@@ -70,14 +70,18 @@ class Calendar
     g = hex_color[2..3].to_i(16)
     b = hex_color[4..5].to_i(16)
 
-    case value
-    when 2
-      opacity = 0.6
-    when 1
-      opacity = 0.3
-    else
-      opacity = 1
-    end
+    opacity = get_opacity(value)
     "rgba(#{r}, #{g}, #{b}, #{opacity});"
+  end
+
+  def get_opacity(value)
+    case value
+    when 3
+      0.6
+    when 4
+      0.3
+    else
+      1
+    end
   end
 end
