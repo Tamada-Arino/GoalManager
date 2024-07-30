@@ -33,7 +33,7 @@ class Goal < ApplicationRecord
   end
 
   def color_check
-    colors = %w[red green blue]
+    colors = %w[#ff0000 #00ff00 #0000ff]
     return if colors.include?(color)
 
     errors.add(color, :invalid_color)
