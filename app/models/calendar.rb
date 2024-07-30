@@ -14,7 +14,7 @@ class Calendar
     week = [{}] * @range_start_date.wday
 
     (@range_start_date..@range_last_date).each do |date|
-      week << target_date_class_and_style(@target_reports[date])
+      week << target_date_class_and_style(@target_reports[date], date)
 
       if date.saturday? || date == @range_last_date
         calendar << week
@@ -26,7 +26,7 @@ class Calendar
 
   def generate_line
     (@range_start_date..@range_last_date).map do |date|
-      target_date_class_and_style(@target_reports[date])
+      target_date_datas(@target_reports[date], date)
     end
   end
 
@@ -47,12 +47,13 @@ class Calendar
     reports_hash
   end
 
-  def target_date_class_and_style(progress_value)
+  def target_date_datas(progress_value, target_date)
     class_with_style = { class: 'date_cell' }
     if progress_value.present?
       status_number = build_status_number(progress_value)
       class_with_style[:class] += " progress_#{status_number}"
       class_with_style[:style] = "background-color: rgba(#{hex_to_rgb(@goal.color)}, 1);"
+      class_with_style[:target_date] = target_date
     end
 
     class_with_style
