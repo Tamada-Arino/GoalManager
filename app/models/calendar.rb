@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Calendar
-  attr_reader :goal, :range
-
   def initialize(goal, range)
     @goal = goal
     @range = range
@@ -20,6 +18,8 @@ class Calendar
   end
 
   private
+
+  attr_reader :goal, :range
 
   def progress_table(range_start_date, range_last_date, target_reports)
     calendar = []
