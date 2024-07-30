@@ -4,7 +4,9 @@ class GoalsController < ApplicationController
   before_action :set_goal, only: %i[show edit update destroy]
 
   def index
-    @goals = current_user.goals.order(:created_at).page(params[:page])
+    PAGINATE_PER = 10
+
+    @goals = current_user.goals.order(:created_at).page(params[:page]).per(PAGINATE_PER)
   end
 
   def show
