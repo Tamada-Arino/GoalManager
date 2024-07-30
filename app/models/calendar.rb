@@ -46,8 +46,8 @@ class Calendar
     end
   end
 
-  def initialize_week(start_date)
-    [{ class: '', style: '' }] * start_date
+  def initialize_week(wday)
+    [{ class: '', style: '' }] * wday
   end
 
   def progress_number(progress_value)
