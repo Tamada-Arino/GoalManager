@@ -38,8 +38,7 @@ class Calendar
 
   def target_date_class_and_style(value)
     if value == 5
-      { class: 'date_cell',
-        style: '' }
+      { class: 'date_cell' }
     else
       { class: "date_cell progress_#{value}",
         style: "background-color: #{@goal.color};" }
@@ -47,7 +46,7 @@ class Calendar
   end
 
   def initialize_week(wday)
-    [{ class: '', style: '' }] * wday
+    [{}] * wday
   end
 
   def progress_number(progress_value)
