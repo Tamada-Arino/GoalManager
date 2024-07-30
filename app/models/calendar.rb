@@ -48,15 +48,15 @@ class Calendar
   end
 
   def target_date_datas(progress_value, target_date)
-    class_with_style = { class: 'date_cell' }
+    date_datas = { class: 'date_cell' }
     if progress_value.present?
       status_number = build_status_number(progress_value)
-      class_with_style[:class] += " progress_#{status_number}"
-      class_with_style[:style] = "background-color: #{get_rgba(@goal.color, status_number)}",
-      class_with_style[:target_date] = target_date
+      date_datas[:class] += " progress_#{status_number}"
+      date_datas[:style] = "background-color: #{get_rgba(@goal.color, status_number)}",
+      date_datas[:target_date] = target_date
     end
 
-    class_with_style
+    date_datas
   end
 
   def build_status_number(progress_value)
