@@ -6,13 +6,7 @@ table.calendar_table
   - @calendar.each do |week|
     tr
       - week.each do |date|
-        - if date.blank?
-          td
-        - elsif date == 5
-          td.date_cell
-        - else
-          td.date_cell [style="background-color: #{@goal.color};"
-            class="progress_#{date}"]
+        td style="#{ date[:style] }" class="#{ date[:class] }"
 table
   tr
     th タイトル
