@@ -52,7 +52,7 @@ class Calendar
     if progress_value.present?
       status_number = build_status_number(progress_value)
       class_with_style[:class] += " progress_#{status_number}"
-      class_with_style[:style] = "background-color: rgba(#{hex_to_rgb(@goal.color)}, 1);"
+      class_with_style[:style] = "background-color: #{get_rgba(@goal.color, status_number)}",
       class_with_style[:target_date] = target_date
     end
 
@@ -63,13 +63,21 @@ class Calendar
     ((progress_value - OFFSET_NUMBER) / THRESHOLD_NUMBER) + OFFSET_NUMBER
   end
 
-  def hex_to_rgb(hex_color)
+  def get_rgba(hex_color, value)
     hex_color = hex_color.delete('#')
 
     r = hex_color[0..1].to_i(16)
     g = hex_color[2..3].to_i(16)
     b = hex_color[4..5].to_i(16)
 
-    "#{r}, #{g}, #{b}"
+    case value
+    when 2
+      opacity = 0.6
+    when 1
+      opacity = 0.3
+    else
+      opacity = 1
+    end
+    "rgba(#{r}, #{g}, #{b}, #{opacity});"
   end
 end
