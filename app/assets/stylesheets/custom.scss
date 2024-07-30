@@ -1,0 +1,25 @@
+.calendar_table {
+  -ms-writing-mode : tb-lr;
+  writing-mode : vertical-lr;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+.date_cell {
+  width: 1em;
+  height: 1em;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background-color: #eee;
+}
+.progress_1 {
+  filter: brightness(0.7);
+}
+.progress_2 {
+  filter: brightness(1);
+}
+.progress_3 {
+  opacity: 0.6;
+}
+.progress_4 {
+  opacity: 0.3;
+}

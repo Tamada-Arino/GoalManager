@@ -2,6 +2,11 @@
   = javascript_import_module_tag 'bulma_modal'
 h3 目標詳細
 = link_to '目標一覧へ戻る', root_path
+table.calendar_table
+  - @calendar.each do |week|
+    tr
+      - week.each do |date|
+        td style="#{ date[:style] }" class="#{ date[:class] }"
 table
   tr
     th タイトル

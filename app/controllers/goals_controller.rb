@@ -9,6 +9,7 @@ class GoalsController < ApplicationController
 
   def show
     @reports = @goal.reports.order(target_date: :DESC).page(params[:page])
+    @calendar = Calendar.new(@goal, 2.months).generate_calendar
   end
 
   def new
