@@ -14,7 +14,7 @@ class Calendar
 
   def generate_calendar
     calendar = []
-    week = initialize_week(@range_start_date.wday)
+    week = [{}] * @range_start_date.wday
 
     (@range_start_date..@range_last_date).each do |date|
       week << target_date_class_and_style(@target_reports[date]&.progress_value)
@@ -46,9 +46,5 @@ class Calendar
     end
 
     class_with_style
-  end
-
-  def initialize_week(wday)
-    [{}] * wday
   end
 end
