@@ -6,10 +6,7 @@ class Calendar
     @range = range
     @range_last_date = @goal.end_date || Time.zone.today
     @range_start_date = [@range_last_date - @range, @goal.start_date].max
-    @target_reports = @goal.reports
-                           .where(target_date: @range_start_date..@range_last_date)
-                           .select(:target_date, :progress_value)
-                           .index_by(&:target_date)
+    @target_reports = build_target_reports
   end
 
   def generate_calendar
@@ -17,7 +14,7 @@ class Calendar
     week = [{}] * @range_start_date.wday
 
     (@range_start_date..@range_last_date).each do |date|
-      week << target_date_class_and_style(@target_reports[date]&.progress_value)
+      week << target_date_class_and_style(@target_reports[date])
 
       if date.saturday? || date == @range_last_date
         calendar << week
@@ -29,13 +26,24 @@ class Calendar
 
   def generate_line
     (@range_start_date..@range_last_date).map do |date|
-      target_date_class_and_style(@target_reports[date]&.progress_value)
+      target_date_class_and_style(@target_reports[date])
     end
   end
 
   private
 
   attr_reader :goal, :range, :range_last_date, :range_start_date, :target_reports
+
+  def build_target_reports
+    reports_hash = {}
+    @goal.reports.each do |report|
+      if (@range_start_date..@range_last_date).include?(report.target_date)
+        reports_hash[report.target_date] = report.progress_value
+      end
+    end
+
+    reports_hash
+  end
 
   def target_date_class_and_style(progress_value)
     class_with_style = { class: 'date_cell' }
