@@ -7,7 +7,7 @@ class Calendar
     @range_last_date = @goal.end_date || Time.zone.today
     @range_start_date = [@range_last_date - @range, @goal.start_date].max
     @target_reports = @goal.reports
-                           .where(target_date: @range_start_date..range_last_date)
+                           .where(target_date: @range_start_date..@range_last_date)
                            .select(:target_date, :progress_value)
                            .index_by(&:target_date)
   end
