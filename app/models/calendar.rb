@@ -14,7 +14,7 @@ class Calendar
     week = [{}] * @range_start_date.wday
 
     (@range_start_date..@range_last_date).each do |date|
-      week << target_date_class_and_style(@target_reports[date], date)
+      week << target_date_datas(@target_reports[date], date)
 
       if date.saturday? || date == @range_last_date
         calendar << week
