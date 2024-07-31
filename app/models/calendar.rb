@@ -33,6 +33,7 @@ class Calendar
   private
 
   attr_reader :goal, :range, :range_last_date, :range_start_date, :target_reports
+
   OFFSET_NUMBER = 1
   THRESHOLD_NUMBER = 25
 
