@@ -4,6 +4,10 @@
   border-collapse: separate;
   border-spacing: 2px;
 }
+.calendar_line {
+  border-collapse: separate;
+  border-spacing: 2px;
+}
 .date_cell {
   width: 1em;
   height: 1em;
@@ -11,15 +15,15 @@
   border-radius: 4px;
   background-color: #eee;
 }
-.progress_1 {
+.progress_4 {
   filter: brightness(0.7);
 }
-.progress_2 {
+.progress_3 {
   filter: brightness(1);
 }
-.progress_3 {
+.progress_2 {
   opacity: 0.6;
 }
-.progress_4 {
+.progress_1 {
   opacity: 0.3;
 }
