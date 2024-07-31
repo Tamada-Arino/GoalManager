@@ -36,7 +36,7 @@ class Calendar
 
   OFFSET_NUMBER = 1
   THRESHOLD_NUMBER = 25
-  DARKEN_NUMBER = 50
+  DARKEN_VALUE = 50
 
   def build_target_reports
     reports_hash = {}
@@ -89,7 +89,7 @@ class Calendar
 
   def darken_color_value(rgb_array)
     rgb_array.map! do |value|
-      [value - DARKEN_NUMBER, 0].max
+      [value - DARKEN_VALUE, 0].max
     end
   end
 end
