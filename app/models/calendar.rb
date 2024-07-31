@@ -90,8 +90,6 @@ class Calendar
     case value
     when 4
       ' progress_4'
-    when 3
-      ' progress_3'
     end
   end
 end
