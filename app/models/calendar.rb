@@ -33,6 +33,8 @@ class Calendar
   private
 
   attr_reader :goal, :range, :range_last_date, :range_start_date, :target_reports
+  OFFSET_NUMBER = 1
+  THRESHOLD_NUMBER = 25
 
   def build_target_reports
     reports_hash = {}
@@ -48,11 +50,15 @@ class Calendar
   def target_date_class_and_style(progress_value)
     class_with_style = { class: 'date_cell' }
     if progress_value.present?
-      status_number = ((progress_value - 1) / 25) + 1
+      status_number = build_status_number(progress_value)
       class_with_style[:class] += " progress_#{status_number}"
       class_with_style[:style] = "background-color: #{@goal.color};"
     end
 
     class_with_style
+  end
+
+  def build_status_number(progress_value)
+    ((progress_value - OFFSET_NUMBER) / THRESHOLD_NUMBER) + OFFSET_NUMBER
   end
 end
