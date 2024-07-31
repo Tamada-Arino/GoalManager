@@ -36,6 +36,7 @@ class Calendar
 
   OFFSET_NUMBER = 1
   THRESHOLD_NUMBER = 25
+  DARKEN_NUMBER = 50
 
   def build_target_reports
     reports_hash = {}
@@ -52,7 +53,6 @@ class Calendar
     date_datas = { class: 'date_cell' }
     if progress_value.present?
       status_number = build_status_number(progress_value)
-      date_datas[:class] += get_classes(status_number).to_s
       date_datas[:style] = "background-color: #{get_rgba(@goal.color, status_number)}"
       date_datas[:target_date] = target_date
     end
@@ -71,6 +71,11 @@ class Calendar
     g = hex_color[2..3].to_i(16)
     b = hex_color[4..5].to_i(16)
 
+    if value == 4
+      r = darken_color_value(r)
+      g = darken_color_value(g)
+      b = darken_color_value(b)
+    end
     opacity = get_opacity(value)
     "rgba(#{r}, #{g}, #{b}, #{opacity});"
   end
@@ -86,10 +91,7 @@ class Calendar
     end
   end
 
-  def get_classes(value)
-    case value
-    when 4
-      ' progress_4'
-    end
+  def darken_color_value(value)
+    [value - DARKEN_NUMBER, 0].max
   end
 end
