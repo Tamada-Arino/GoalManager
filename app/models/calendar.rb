@@ -52,7 +52,7 @@ class Calendar
     if progress_value.present?
       status_number = build_status_number(progress_value)
       date_datas[:class] += " progress_#{status_number}"
-      date_datas[:style] = "background-color: #{get_rgba(@goal.color, status_number)}",
+      date_datas[:style] = "background-color: #{get_rgba(@goal.color, status_number)}"
       date_datas[:target_date] = target_date
     end
 
@@ -76,9 +76,9 @@ class Calendar
 
   def get_opacity(value)
     case value
-    when 3
+    when 2
       0.6
-    when 4
+    when 1
       0.3
     else
       1
