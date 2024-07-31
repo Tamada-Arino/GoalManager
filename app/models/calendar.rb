@@ -67,17 +67,13 @@ class Calendar
   def get_rgba(hex_color, value)
     hex_color = hex_color.delete('#')
 
-    r = hex_color[0..1].to_i(16)
-    g = hex_color[2..3].to_i(16)
-    b = hex_color[4..5].to_i(16)
+    rgb_array = [hex_color[0..1].to_i(16),
+                 hex_color[2..3].to_i(16),
+                 hex_color[4..5].to_i(16)]
 
-    if value == 4
-      r = darken_color_value(r)
-      g = darken_color_value(g)
-      b = darken_color_value(b)
-    end
+    darken_color_value(rgb_array) if value == 4
     opacity = get_opacity(value)
-    "rgba(#{r}, #{g}, #{b}, #{opacity});"
+    "rgba(#{rgb_array[0]}, #{rgb_array[1]}, #{rgb_array[2]}, #{opacity});"
   end
 
   def get_opacity(value)
@@ -91,7 +87,9 @@ class Calendar
     end
   end
 
-  def darken_color_value(value)
-    [value - DARKEN_NUMBER, 0].max
+  def darken_color_value(rgb_array)
+    rgb_array.map! do |value|
+      [value - DARKEN_NUMBER, 0].max
+    end
   end
 end
