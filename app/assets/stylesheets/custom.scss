@@ -33,11 +33,11 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.date_cell:hover {
+.table_cell:hover {
   filter: none;
   filter: brightness(1.2)
 }
-.date_cell:hover .date_bubble {
+.table_cell:hover .date_bubble {
   display: block;
 }
 .progress_4 {

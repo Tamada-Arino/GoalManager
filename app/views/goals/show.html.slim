@@ -9,7 +9,7 @@ table.calendar_table
   - @calendar.each do |week|
     tr
       - week.each do |date|
-        td style="#{ date[:style] }" class="#{ date[:class] }"
+        td style="#{ date[:style] }" class="#{ date[:class] } table_cell"
           - if date[:target_date].present?
             p.date_bubble = date[:target_date]
 table
