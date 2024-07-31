@@ -4,6 +4,7 @@ class GoalsController < ApplicationController
   before_action :set_goal, only: %i[show edit update destroy]
   PAGINATE_PER = 10
   CALENDAR_LINE_DAYS = 14
+  CALENDAR_MONTHS = 2
 
   def index
     @goals = current_user.goals.includes(:reports).order(:created_at).page(params[:page]).per(PAGINATE_PER)
@@ -15,7 +16,7 @@ class GoalsController < ApplicationController
 
   def show
     @reports = @goal.reports.order(target_date: :DESC).page(params[:page])
-    @calendar = Calendar.new(@goal, 2.months).generate_calendar
+    @calendar = Calendar.new(@goal, CALENDAR_MONTHS.months).generate_calendar
   end
 
   def new
