@@ -6,6 +6,10 @@ class GoalsController < ApplicationController
 
   def index
     @goals = current_user.goals.order(:created_at).page(params[:page]).per(PAGINATE_PER)
+
+    @calendars = @goals.map do |goal|
+      Calendar.new(goal, 14.days).generate_line
+    end
   end
 
   def show

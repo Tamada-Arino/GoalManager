@@ -10,11 +10,11 @@
 h3 目標一覧
 = link_to '目標の作成', new_goal_path, class: 'button'
 ul
-  - @goals.each do |goal|
+  - @goals.each.with_index do |goal, i|
     li.box = link_to goal_path(goal) do
       p #{goal.title} - #{goal.status}
       table.calendar_line
         tr
-          - Calendar.new(goal, 14.days).generate_line.each do |date|
+          - @calendars[i].each do |date|
             td style="#{ date[:style] }" class="#{ date[:class] }"
 = paginate @goals
