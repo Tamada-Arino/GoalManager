@@ -36,6 +36,7 @@ class Calendar
 
   OFFSET_NUMBER = 1
   THRESHOLD_NUMBER = 25
+  GOOD_STATUS = 4
   DARKEN_VALUE = 50
 
   def build_target_reports
@@ -71,7 +72,7 @@ class Calendar
                  hex_color[2..3].to_i(16),
                  hex_color[4..5].to_i(16)]
 
-    darken_color_value(rgb_array) if value == 4
+    darken_color_value(rgb_array) if value == GOOD_STATUS
     opacity = get_opacity(value)
     "rgba(#{rgb_array[0]}, #{rgb_array[1]}, #{rgb_array[2]}, #{opacity});"
   end
