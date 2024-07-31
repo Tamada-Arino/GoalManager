@@ -37,7 +37,7 @@ class Calendar
   def build_target_reports
     reports_hash = {}
     @goal.reports.each do |report|
-      if (@range_start_date..@range_last_date).include?(report.target_date)
+      if (@range_start_date..@range_last_date).cover?(report.target_date)
         reports_hash[report.target_date] = report.progress_value
       end
     end
