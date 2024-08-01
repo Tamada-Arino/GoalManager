@@ -37,7 +37,7 @@ class Calendar
   OFFSET_NUMBER = 1
   THRESHOLD_NUMBER = 25
   GOOD_STATUS = 4
-  DARKEN_VALUE = 50
+  DARKEN_VALUE = 65
 
   def build_target_reports
     reports_hash = {}
