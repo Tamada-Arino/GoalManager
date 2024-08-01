@@ -11,6 +11,8 @@ class Goal < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :small_goals, dependent: :destroy
 
+  accepts_nested_attributes_for :small_goals, allow_destroy: true, reject_if: :all_blank
+
   def status
     if end_date.present?
       '完了'
