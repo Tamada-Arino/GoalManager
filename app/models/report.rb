@@ -6,6 +6,7 @@ class Report < ApplicationRecord
   validate :progress_date_check
 
   belongs_to :goal
+  belongs_to :small_goal
 
   private
 

@@ -9,6 +9,7 @@ class Goal < ApplicationRecord
 
   belongs_to :user
   has_many :reports, dependent: :destroy
+  has_many :small_goals, dependent: :destroy
 
   def status
     if end_date.present?
