@@ -1,16 +1,18 @@
 - content_for :js do
   = javascript_import_module_tag 'bulma_modal'
-h3 目標詳細
+h3 = @goal.title
 = link_to '目標一覧へ戻る', root_path
 table.calendar_table
+  tr
+    - weekday.each do |wday|
+      td.table_text = wday
   - @calendar.each do |week|
     tr
       - week.each do |date|
-        td style="#{ date[:style] }" class="#{ date[:class] }"
+        td style="#{ date[:style] }" class="#{ date[:class] } table_cell"
+          - if date[:target_date].present?
+            p.date_bubble = date[:target_date]
 table
-  tr
-    th タイトル
-    td = @goal.title
   tr
     th ステータス
     td = @goal.status
@@ -25,9 +27,6 @@ table
     tr
       th 達成日
       td = @goal.end_date
-  tr
-    th ベースカラー
-    td = @goal.color
 = link_to '編集する', edit_goal_path(@goal), class: 'button'
 h3 日報一覧
 = link_to '日報作成', new_goal_report_path(@goal), class: 'button'

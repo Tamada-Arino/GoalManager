@@ -17,12 +17,12 @@
       tr
         th ベースカラー
         td
-          = f.radio_button :color, 'red',
-            checked: goal.new_record? || goal.color == 'red'
+          = f.radio_button :color, '#ff0000',
+            checked: goal.new_record? || goal.color == '#ff0000'
           = f.label :color_red, '赤'
-          = f.radio_button :color, 'green'
+          = f.radio_button :color, '#00ff00'
           = f.label :color_green, '緑'
-          = f.radio_button :color, 'blue'
+          = f.radio_button :color, '#0000ff'
           = f.label :color_blue, '青'
     - if goal.persisted?
       .form
