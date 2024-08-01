@@ -66,11 +66,9 @@ class Calendar
   end
 
   def get_rgba(hex_color, value)
-    hex_color = hex_color.delete('#')
-
-    rgb_array = [hex_color[0..1].to_i(16),
-                 hex_color[2..3].to_i(16),
-                 hex_color[4..5].to_i(16)]
+    rgb_array = [hex_color[1..2].to_i(16),
+                 hex_color[3..4].to_i(16),
+                 hex_color[5..6].to_i(16)]
 
     darken_color_value(rgb_array) if value == GOOD_STATUS
     opacity = get_opacity(value)
