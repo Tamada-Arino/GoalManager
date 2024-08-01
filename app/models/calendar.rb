@@ -37,6 +37,8 @@ class Calendar
   OFFSET_NUMBER = 1
   THRESHOLD_NUMBER = 25
   GOOD_STATUS = 4
+  SOSO_STATUS = 2
+  BAD_STATUS = 1
   DARKEN_VALUE = 65
 
   def build_target_reports
@@ -77,9 +79,9 @@ class Calendar
 
   def get_opacity(value)
     case value
-    when 2
+    when SOSO_STATUS
       0.6
-    when 1
+    when BAD_STATUS
       0.3
     else
       1
