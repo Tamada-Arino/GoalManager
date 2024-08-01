@@ -70,7 +70,7 @@ class Calendar
                  hex_color[3..4].to_i(16),
                  hex_color[5..6].to_i(16)]
 
-    darken_color_value(rgb_array) if value == GOOD_STATUS
+    rgb_array = darken_color_value(rgb_array) if value == GOOD_STATUS
     opacity = get_opacity(value)
     "rgba(#{rgb_array[0]}, #{rgb_array[1]}, #{rgb_array[2]}, #{opacity});"
   end
@@ -87,7 +87,7 @@ class Calendar
   end
 
   def darken_color_value(rgb_array)
-    rgb_array.map! do |value|
+    rgb_array.map do |value|
       [value - DARKEN_VALUE, 0].max
     end
   end
