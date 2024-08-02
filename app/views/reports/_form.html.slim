@@ -11,7 +11,8 @@
           th = f.label :progress_value
           td
             - progress_value = f.object.progress_value || 50
-            = f.range_field :progress_value, in: 0..100, value: progress_value, data: { slider_target: 'slider' }
+            = f.range_field :progress_value, in: 0..100, value: progress_value,
+                                             data: { slider_target: 'slider' }
             span data-slider-target='value' = progress_value
       .form
         tr
