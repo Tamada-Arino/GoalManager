@@ -1,3 +1,5 @@
+- content_for :js do
+  = javascript_import_module_tag 'small_goals_form'
 h3 目標新規作成
 = link_to '戻る', :back
 = render 'shared/errors', obj: @goal

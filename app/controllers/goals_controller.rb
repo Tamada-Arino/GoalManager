@@ -21,9 +21,7 @@ class GoalsController < ApplicationController
 
   def new
     @goal = current_user.goals.new
-    3.times do
-      @goal.small_goals.build
-    end
+    @goal.small_goals.build
   end
 
   def edit; end
