@@ -35,6 +35,13 @@
         tr
           th = f.label :end_date
           td = f.date_field :end_date
+    = f.fields_for :small_goals do |small_goal|
+      tr
+        th = small_goal.label :title
+        td = small_goal.text_field :title
+        td
+          =small_goal.check_box :achievable
+          = small_goal.label :achievable
     .form
       tr
         td colspan=2
