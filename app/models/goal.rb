@@ -12,7 +12,8 @@ class Goal < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :small_goals, dependent: :destroy, inverse_of: :goal
 
-  accepts_nested_attributes_for :small_goals, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :small_goals, allow_destroy: true,
+                                reject_if: lambda { |attributes| attributes['title'].blank? }
 
   def status
     if end_date.present?
