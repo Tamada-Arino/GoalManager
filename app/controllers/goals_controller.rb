@@ -38,6 +38,7 @@ class GoalsController < ApplicationController
   end
 
   def update
+    check_and_mark_for_deletion
     if @goal.update(goal_params)
       redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
     else
@@ -54,6 +55,14 @@ class GoalsController < ApplicationController
 
   def set_goal
     @goal = current_user.goals.find(params[:id])
+  end
+
+  def check_and_mark_for_deletion
+    goal_params[:small_goals_attributes]&.each do |_key, small_goal|
+      if small_goal[:title].blank?
+        small_goal[:_destroy] = true
+      end
+    end
   end
 
   def goal_params
