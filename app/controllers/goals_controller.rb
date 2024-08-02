@@ -24,7 +24,9 @@ class GoalsController < ApplicationController
     @goal.small_goals.build
   end
 
-  def edit; end
+  def edit
+    @goal.small_goals.build
+  end
 
   def create
     @goal = current_user.goals.new(goal_params)
@@ -56,6 +58,6 @@ class GoalsController < ApplicationController
 
   def goal_params
     params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color],
-                                 small_goals_attributes: [:title, :achievable])
+                                 small_goals_attributes: [:id, :title, :achievable])
   end
 end
