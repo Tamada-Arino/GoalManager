@@ -9,7 +9,7 @@ class Goal < ApplicationRecord
 
   belongs_to :user
   has_many :reports, dependent: :destroy
-  has_many :small_goals, dependent: :destroy
+  has_many :small_goals, dependent: :destroy, inverse_of: :goal
 
   accepts_nested_attributes_for :small_goals, allow_destroy: true, reject_if: :all_blank
 
