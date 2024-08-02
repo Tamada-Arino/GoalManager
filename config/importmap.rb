@@ -9,4 +9,3 @@ pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js'
 pin_all_from 'app/javascript/controllers', under: 'controllers'
 
 pin 'bulma_modal', to: 'bulma_modal.js'
-pin 'small_goals_form', to: 'small_goals_form'
