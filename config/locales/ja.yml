@@ -132,6 +132,7 @@ ja:
       end_date_invalid: は達成日以降を登録できません
       invalid_color: は赤、緑、青のいずれかから選んでください
       over_small_goals_count: 一つの目標に設定できる小目標は3つまでです
+      small_goals_not_achieved_yet: は全ての小目標が達成できてから入力してください
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"
