@@ -28,9 +28,20 @@ class GoalsController < ApplicationController
 
   def create
     @goal = current_user.goals.new(goal_params)
-    if @goal.save
-      redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
-    else
+    @small_goal = SmallGoal.new(small_goal_params)
+    begin
+      ActiveRecord::Base.transaction do
+        @goal.save!
+        @small_goal.goal = @goal
+        @small_goal.save!
+        redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
+      end
+    rescue ActiveRecord::RecordInvalid
+      binding.break
+      @small_goal.errors.full_messages.each do |message|
+        @goal.errors.add(:base, message)
+      end
+
       render :new, status: :unprocessable_entity
     end
   end
@@ -55,14 +66,10 @@ class GoalsController < ApplicationController
   end
 
   def goal_params
-    params.require(:goal).permit(
-    :title,
-    :start_date,
-    :schedules_end_date,
-    :end_date,
-    :interrupted,
-    :color,
-    small_goals_attributes: [:title, :achievable]
-  )
+    params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color])
+  end
+
+  def small_goal_params
+    params.require(:goal).require(:small_goal).permit(:title, :achievable)
   end
 end
