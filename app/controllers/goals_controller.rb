@@ -37,7 +37,6 @@ class GoalsController < ApplicationController
         redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
       end
     rescue ActiveRecord::RecordInvalid
-      binding.break
       @small_goal.errors.full_messages.each do |message|
         @goal.errors.add(:base, message)
       end
