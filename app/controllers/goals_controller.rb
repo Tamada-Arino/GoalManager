@@ -21,12 +21,9 @@ class GoalsController < ApplicationController
 
   def new
     @goal = current_user.goals.new
-    @goal.small_goals.build
   end
 
-  def edit
-    @goal.small_goals.build if @goal.small_goals.empty?
-  end
+  def edit; end
 
   def create
     @goal = current_user.goals.new(goal_params)
@@ -57,16 +54,7 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.find(params[:id])
   end
 
-  def check_and_mark_for_deletion
-    goal_params[:small_goals_attributes]&.each do |_key, small_goal|
-      if small_goal[:title].blank?
-        small_goal[:_destroy] = true
-      end
-    end
-  end
-
   def goal_params
-    params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color],
-                                 small_goals_attributes: [:id, :title, :achievable, :_destroy])
+    params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color])
   end
 end
