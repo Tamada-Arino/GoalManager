@@ -29,21 +29,22 @@ class GoalsController < ApplicationController
   def create
     @goal = current_user.goals.new(goal_params)
     @small_goal = SmallGoal.new(small_goal_params)
-    begin
-      ActiveRecord::Base.transaction do
-        @goal.save!
-        @small_goal.goal = @goal
-        @small_goal.save!
-        redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
-      end
-    rescue ActiveRecord::RecordInvalid
-      @small_goal.errors.full_messages.each do |message|
-        @goal.errors.add(:base, message)
-      end
 
-      render :new, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      @goal.save!
+      @small_goal.goal = @goal
+      @small_goal.save!
     end
+
+    redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
+  rescue ActiveRecord::RecordInvalid
+    @small_goal.errors.full_messages.each do |message|
+      @goal.errors.add(:base, message)
+    end
+
+    render :new, status: :unprocessable_entity
   end
+
 
   def update
     if @goal.update(goal_params)
