@@ -37,5 +37,11 @@
           td = f.date_field :end_date
     .form
       tr
+        th 小目標
+        td
+          = f.text_field :small_goal_title, name: 'goal[small_goal][title]'
+          = f.check_box :small_goal_achievable, name: 'goal[small_goal][achievable]'
+    .form
+      tr
         td colspan=2
           = f.submit nil, class: 'button'

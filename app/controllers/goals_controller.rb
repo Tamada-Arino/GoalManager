@@ -15,6 +15,7 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @small_goals = @goal.small_goals.order(:created_at)
     @reports = @goal.reports.order(target_date: :DESC).page(params[:page])
     @calendar = Calendar.new(@goal, CALENDAR_MONTHS.months).generate_calendar
   end
@@ -27,7 +28,9 @@ class GoalsController < ApplicationController
 
   def create
     @goal = current_user.goals.new(goal_params)
+    small_goal_params = params[:goal][:small_goal]
     if @goal.save
+      create_small_goal(@goal, small_goal_params)
       redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
     else
       render :new, status: :unprocessable_entity
@@ -35,8 +38,9 @@ class GoalsController < ApplicationController
   end
 
   def update
-    check_and_mark_for_deletion
+    small_goal_params = params[:goal][:small_goal]
     if @goal.update(goal_params)
+      create_small_goal(@goal, small_goal_params)
       redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
     else
       render :edit, status: :unprocessable_entity
@@ -56,5 +60,12 @@ class GoalsController < ApplicationController
 
   def goal_params
     params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color])
+  end
+
+  def create_small_goal(goal, small_goal_params)
+    goal.small_goals.create(
+      title: small_goal_params[:title],
+      achievable: small_goal_params[:achievable] == '1'
+    )
   end
 end
