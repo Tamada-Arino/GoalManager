@@ -35,18 +35,25 @@
         tr
           th = f.label :end_date
           td = f.date_field :end_date
-    .form
-      tr
-        th 小目標 1
-        td
-          = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][0][title]'
-          = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][0][achievable]'
-    .form
-      tr
-        th 小目標 2
-        td
-          = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][1][title]'
-          = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][1][achievable]'
+    div data-controller='small-goal'
+      div data-small-goal-target='form'
+        .form.small_goals
+          tr
+            th 小目標 1
+            td
+              = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][0][title]'
+              = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][0][achievable]'
+        .form
+          tr
+            th 小目標 2
+            td
+              = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][1][title]'
+              = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][1][achievable]'
+      .form
+        tr
+          td
+            button.button data-action="click->small-goal#test" Test
+
 
     .form
       tr
