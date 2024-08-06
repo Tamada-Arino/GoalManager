@@ -7,6 +7,7 @@ class Goal < ApplicationRecord
   validate :color_check
   validate :start_date_check
   validate :small_goals_achievable_check
+  after_validation :remove_small_goal_errors
 
   belongs_to :user
   has_many :reports, dependent: :destroy
@@ -45,5 +46,9 @@ class Goal < ApplicationRecord
     return if end_date.blank? || small_goals.all?(&:achievable)
 
     errors.add(:end_date, :small_goals_not_achieved_yet)
+  end
+
+  def remove_small_goal_errors
+    errors.delete(:small_goals)
   end
 end
