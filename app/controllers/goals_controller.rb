@@ -28,20 +28,19 @@ class GoalsController < ApplicationController
 
   def create
     @goal = current_user.goals.new(goal_params)
-    @small_goal = SmallGoal.new(small_goal_params)
+    small_goals_attributes = params.dig(:goal, :small_goals_attributes)
 
     ActiveRecord::Base.transaction do
       @goal.save!
-      @small_goal.goal = @goal
-      @small_goal.save!
+      create_small_goals(small_goals_attributes, @goal)
     end
-
     redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
-  rescue ActiveRecord::RecordInvalid
-    @small_goal.errors.full_messages.each do |message|
-      @goal.errors.add(:base, message)
+  rescue ActiveRecord::RecordInvalid => e
+    if e.record.is_a?(SmallGoal)
+      e.record.errors.full_messages.each do |message|
+        @goal.errors.add(:base, message)
+      end
     end
-
     render :new, status: :unprocessable_entity
   end
 
@@ -80,4 +79,15 @@ class GoalsController < ApplicationController
   def small_goal_params
     params.require(:goal).require(:small_goal).permit(:title, :achievable)
   end
+
+  def create_small_goals(small_goals, goal)
+    small_goals.each do |params|
+      SmallGoal.create!(
+        goal: goal,
+        title: params[:title],
+        achievable: params[:achievable] == '1'
+      )
+    end
+  end
+
 end
