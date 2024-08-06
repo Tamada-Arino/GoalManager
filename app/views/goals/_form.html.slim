@@ -39,14 +39,14 @@
       tr
         th 小目標 1
         td
-          = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][][title]'
-          = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][][achievable]'
+          = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][0][title]'
+          = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][0][achievable]'
     .form
       tr
         th 小目標 2
         td
-          = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][][title]'
-          = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][][achievable]'
+          = f.text_field :small_goals_attributes, name: 'goal[small_goals_attributes][1][title]'
+          = f.check_box :small_goals_attributes, name: 'goal[small_goals_attributes][1][achievable]'
 
     .form
       tr
