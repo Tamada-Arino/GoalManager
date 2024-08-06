@@ -22,20 +22,18 @@ class GoalsController < ApplicationController
 
   def new
     @goal = current_user.goals.new
-    @small_goals = @goal.small_goals.new
   end
 
   def edit; end
 
   def create
     @goal = current_user.goals.new(goal_params)
-    @small_goals = @goal.small_goals.new
     small_goals_attributes = params.dig(:goal, :small_goals_attributes)
 
-    small_goals_attributes.each do |params|
+    small_goals_attributes.each do |_key, small_goal_params|
       @goal.small_goals.build(
-        title: params[:title],
-        achievable: params[:achievable] == '1'
+        title: small_goal_params[:title],
+        achievable: small_goal_params[:achievable] == '1'
       )
     end
 
