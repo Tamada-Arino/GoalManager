@@ -3,4 +3,5 @@ h3 目標新規作成
 = render 'shared/errors', obj: @goal
 - @goal.small_goals.each do |small_goal|
   = render 'shared/errors', obj: small_goal
-= render 'form', goal: @goal
+div data-controller='small-goal'
+  = render 'form', goal: @goal
