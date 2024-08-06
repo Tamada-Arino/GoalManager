@@ -1,5 +1,6 @@
 h3 目標新規作成
 = link_to '戻る', :back
 = render 'shared/errors', obj: @goal
-= render 'shared/errors', obj: @small_goals
+- @goal.small_goals.each do |small_goal|
+  = render 'shared/errors', obj: small_goal
 = render 'form', goal: @goal
