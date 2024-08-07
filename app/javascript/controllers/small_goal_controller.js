@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="small-goal"
 export default class extends Controller {
-  static targets = ["forms"]
+  static targets = ["forms", "button"]
 
   connect() {
     this.index = 0;
@@ -21,9 +21,20 @@ export default class extends Controller {
     `;
     this.formsTarget.insertAdjacentHTML('beforeend', html);
     this.index++;
+    this.updateButtonState();
   }
 
   removeHtml(event) {
     event.currentTarget.closest("div").remove();
+    this.updateButtonState();
+  }
+
+  updateButtonState() {
+    const smallGoalCount = this.formsTarget.querySelectorAll(".small_goals").length;
+    if (smallGoalCount >= 3) {
+      this.buttonTarget.disabled = true;
+    } else {
+      this.buttonTarget.disabled = false;
+    }
   }
 }

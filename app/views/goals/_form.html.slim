@@ -33,7 +33,8 @@
       br
       = f.date_field :end_date
   .form
-    button type="button" data-action="click->small-goal#insertHtml" 小目標を追加
+    button type="button" data-action="click->small-goal#insertHtml" data-small-goal-target="button"
+      | 小目標を追加
   div data-small-goal-target='forms'
     - if goal.persisted?
       - goal.small_goals.each_with_index do |small_goal, i|
