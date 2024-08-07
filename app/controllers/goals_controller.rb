@@ -33,7 +33,7 @@ class GoalsController < ApplicationController
     small_goals_attributes.each do |_key, small_goal_params|
       @goal.small_goals.build(
         title: small_goal_params[:title],
-        achievable: small_goal_params[:achievable] == '1'
+        achievable: small_goal_params[:achievable]
       )
     end
 
