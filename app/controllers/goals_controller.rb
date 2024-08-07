@@ -45,20 +45,11 @@ class GoalsController < ApplicationController
   end
 
   def update
-    @small_goal = @goal.small_goals.first
-
-    ActiveRecord::Base.transaction do
-      @goal.update!(goal_params)
-      @small_goal.update!(small_goal_params)
-
-      redirect_to @goal, notice: t('notice.update', content: Report.model_name.human)
+    if @goal.update(goal_params)
+      redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
+    else
+      render :edit, status: :unprocessable_entity
     end
-  rescue ActiveRecord::RecordInvalid
-    @small_goal.errors.full_messages.each do |message|
-      @goal.errors.add(:base, message)
-    end
-
-    render :edit, status: :unprocessable_entity
   end
 
   def destroy
