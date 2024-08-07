@@ -1,7 +1,8 @@
 h3 目標編集
 = link_to '戻る', :back
 = render 'shared/errors', obj: @goal
-= render 'form', goal: @goal
+div data-controller='small-goal'
+  = render 'form', goal: @goal
 = link_to '削除する', goal_path(@goal), data: { turbo_method: :delete,
   turbo_confirm: "#{@goal.title}を削除してもよろしいですか？" },
   class: 'button is-danger has-text-white'
