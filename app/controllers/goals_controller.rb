@@ -63,6 +63,8 @@ class GoalsController < ApplicationController
   end
 
   def build_small_goals(small_goals_attributes, goal)
+    return if small_goals_attributes.blank?
+
     small_goals_attributes.each_value do |small_goal_params|
       goal.small_goals.build(
         title: small_goal_params[:title],
