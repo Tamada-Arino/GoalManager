@@ -30,12 +30,7 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.new(goal_params)
     small_goals_attributes = params.dig(:goal, :small_goals_attributes)
 
-    small_goals_attributes.each_value do |small_goal_params|
-      @goal.small_goals.build(
-        title: small_goal_params[:title],
-        achievable: small_goal_params[:achievable]
-      )
-    end
+    build_small_goals(small_goals_attributes, @goal)
 
     if @goal.save
       redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
@@ -65,5 +60,14 @@ class GoalsController < ApplicationController
 
   def goal_params
     params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color])
+  end
+
+  def build_small_goals(small_goals_attributes, goal)
+    small_goals_attributes.each_value do |small_goal_params|
+      goal.small_goals.build(
+        title: small_goal_params[:title],
+        achievable: small_goal_params[:achievable]
+      )
+    end
   end
 end
