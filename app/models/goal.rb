@@ -6,9 +6,12 @@ class Goal < ApplicationRecord
   validates :color, presence: true
   validate :color_check
   validate :start_date_check
+  validate :small_goals_achievable_check
+  after_validation :remove_small_goal_errors
 
   belongs_to :user
   has_many :reports, dependent: :destroy
+  has_many :small_goals, dependent: :destroy, inverse_of: :goal
 
   def status
     if end_date.present?
@@ -37,5 +40,15 @@ class Goal < ApplicationRecord
     return if colors.include?(color)
 
     errors.add(color, :invalid_color)
+  end
+
+  def small_goals_achievable_check
+    return if end_date.blank? || small_goals.all?(&:achievable)
+
+    errors.add(:end_date, :small_goals_not_achieved_yet)
+  end
+
+  def remove_small_goal_errors
+    errors.delete(:small_goals)
   end
 end

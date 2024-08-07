@@ -15,6 +15,9 @@ ja:
         content: 本文
         target_date: 実行日
         progress_value: 達成度
+      small_goal:
+        title: 小目標タイトル
+        achievable: 達成済み
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -128,6 +131,8 @@ ja:
       start_date_invalid: は開始日以前を登録できません
       end_date_invalid: は達成日以降を登録できません
       invalid_color: は赤、緑、青のいずれかから選んでください
+      over_small_goals_count: 一つの目標に設定できる小目標は3つまでです
+      small_goals_not_achieved_yet: は全ての小目標が達成できてから入力してください
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"

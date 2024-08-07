@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_24_042617) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_053919) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -59,8 +59,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_042617) do
     t.integer "progress_value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "small_goal_id"
     t.index ["goal_id", "target_date"], name: "index_reports_on_goal_id_and_target_date", unique: true
     t.index ["goal_id"], name: "index_reports_on_goal_id"
+    t.index ["small_goal_id"], name: "index_reports_on_small_goal_id"
+  end
+
+  create_table "small_goals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "goal_id", null: false
+    t.string "title", null: false
+    t.boolean "achievable", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_small_goals_on_goal_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -80,4 +91,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_042617) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "goals", "users"
   add_foreign_key "reports", "goals"
+  add_foreign_key "reports", "small_goals"
+  add_foreign_key "small_goals", "goals"
 end

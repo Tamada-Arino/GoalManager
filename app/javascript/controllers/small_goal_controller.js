@@ -1,0 +1,40 @@
+import { Controller } from "@hotwired/stimulus";
+
+// Connects to data-controller="small-goal"
+export default class extends Controller {
+  static targets = ["forms", "button"]
+
+  connect() {
+    this.index = 0;
+  }
+
+  insertHtml() {
+    const html = `
+      <div class="form small_goals">
+        <label>小目標</label>
+        <br>
+        <input type="text" name="goal[small_goals_attributes][${this.index}][title]" />
+        <input type="checkbox" name="goal[small_goals_attributes][${this.index}][achievable]" />
+        <label>達成済み</label>
+        <button type="button" data-action="click->small-goal#removeHtml">削除</button>
+      </div>
+    `;
+    this.formsTarget.insertAdjacentHTML('beforeend', html);
+    this.index++;
+    this.updateButtonState();
+  }
+
+  removeHtml(event) {
+    event.currentTarget.closest("div").remove();
+    this.updateButtonState();
+  }
+
+  updateButtonState() {
+    const smallGoalCount = this.formsTarget.querySelectorAll(".small_goals").length;
+    if (smallGoalCount >= 3) {
+      this.buttonTarget.disabled = true;
+    } else {
+      this.buttonTarget.disabled = false;
+    }
+  }
+}

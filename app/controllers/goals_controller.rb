@@ -15,6 +15,7 @@ class GoalsController < ApplicationController
   end
 
   def show
+    @small_goals = @goal.small_goals.order(:created_at)
     @reports = @goal.reports.order(target_date: :DESC).page(params[:page])
     @calendar = Calendar.new(@goal, CALENDAR_MONTHS.months).generate_calendar
   end
@@ -27,6 +28,10 @@ class GoalsController < ApplicationController
 
   def create
     @goal = current_user.goals.new(goal_params)
+    small_goals_attributes = params.dig(:goal, :small_goals_attributes)
+
+    build_small_goals(small_goals_attributes, @goal)
+
     if @goal.save
       redirect_to root_path, notice: t('notice.create', content: Goal.model_name.human)
     else
@@ -55,5 +60,16 @@ class GoalsController < ApplicationController
 
   def goal_params
     params.require(:goal).permit(%i[title start_date schedules_end_date end_date interrupted color])
+  end
+
+  def build_small_goals(small_goals_attributes, goal)
+    return if small_goals_attributes.blank?
+
+    small_goals_attributes.each_value do |small_goal_params|
+      goal.small_goals.build(
+        title: small_goal_params[:title],
+        achievable: small_goal_params[:achievable]
+      )
+    end
   end
 end

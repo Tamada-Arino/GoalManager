@@ -1,41 +1,57 @@
 = form_with model: goal, local: true do |f|
-  table
+  .form
+    = f.label :title
+    br
+    = f.text_field :title
+  .form
+    = f.label :start_date
+    br
+    = f.date_field :start_date,
+      value: f.object.start_date || Time.zone.today
+  .form
+    = f.label :schedules_end_date
+    br
+    = f.date_field :schedules_end_date
+  .form
+    = f.label :color
+    br
+    = f.radio_button :color, '#ff0000',
+      checked: goal.new_record? || goal.color == '#ff0000'
+    = f.label :color_red, '赤'
+    = f.radio_button :color, '#00ff00'
+    = f.label :color_green, '緑'
+    = f.radio_button :color, '#0000ff'
+    = f.label :color_blue, '青'
+  - if goal.persisted?
     .form
-      tr
-        th = f.label :title
-        td = f.text_field :title
+      = f.label :interrupted
+      br
+      = f.check_box :interrupted
+      = f.label :interrupted
     .form
-      tr
-        th = f.label :start_date
-        td = f.date_field :start_date,
-             value: f.object.start_date || Time.zone.today
-    .form
-      tr
-        th = f.label :schedules_end_date
-        td = f.date_field :schedules_end_date
-    .form
-      tr
-        th ベースカラー
-        td
-          = f.radio_button :color, '#ff0000',
-            checked: goal.new_record? || goal.color == '#ff0000'
-          = f.label :color_red, '赤'
-          = f.radio_button :color, '#00ff00'
-          = f.label :color_green, '緑'
-          = f.radio_button :color, '#0000ff'
-          = f.label :color_blue, '青'
-    - if goal.persisted?
-      .form
-        tr
-          th 中断中ステータス
-          td
-            = f.check_box :interrupted
-            = f.label :interrupted
-      .form
-        tr
-          th = f.label :end_date
-          td = f.date_field :end_date
-    .form
-      tr
-        td colspan=2
-          = f.submit nil, class: 'button'
+      = f.label :end_date
+      br
+      = f.date_field :end_date
+  .form
+    button.button [type='button'
+      data-action='click->small-goal#insertHtml'
+      data-small-goal-target='button']
+      | 小目標を追加
+  div data-small-goal-target='forms'
+    - goal.small_goals.each_with_index do |small_goal, i|
+      .form.small_goals
+        label 小目標
+        br
+        = f.text_field :small_goals_attributes,
+          name: "goal[small_goals_attributes][sg_#{i}][title]",
+          value: small_goal.title
+        = f.check_box :small_goals_attributes,
+          name: "goal[small_goals_attributes][sg_#{i}][achievable]",
+          checked: small_goal.achievable
+        label 達成済み
+        = f.hidden_field :small_goals_attributes,
+          name: "goal[small_goals_attributes][sg_#{i}][id]",
+          value: small_goal.id
+        button type='button' data-action='click->small-goal#removeHtml' 削除
+  .form
+    = f.submit nil, class: 'button'
