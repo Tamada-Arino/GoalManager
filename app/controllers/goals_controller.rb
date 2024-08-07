@@ -30,7 +30,7 @@ class GoalsController < ApplicationController
     @goal = current_user.goals.new(goal_params)
     small_goals_attributes = params.dig(:goal, :small_goals_attributes)
 
-    small_goals_attributes.each do |_key, small_goal_params|
+    small_goals_attributes.each_value do |small_goal_params|
       @goal.small_goals.build(
         title: small_goal_params[:title],
         achievable: small_goal_params[:achievable]
