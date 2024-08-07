@@ -15,7 +15,7 @@ export default class extends Controller {
         <br>
         <input type="text" name="goal[small_goals_attributes][${this.index}][title]" />
         <input type="checkbox" name="goal[small_goals_attributes][${this.index}][achievable]" />
-        <label for="goal_small_goals_attributes_${this.index}_achievable">達成済み</label>
+        <label>達成済み</label>
         <button type="button" data-action="click->small-goal#removeHtml">削除</button>
       </div>
     `;
