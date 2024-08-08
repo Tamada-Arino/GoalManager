@@ -39,6 +39,7 @@ class GoalsController < ApplicationController
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
   def update
     small_goals_attributes = params.dig(:goal, :small_goals_attributes)
     @goal.assign_attributes(goal_params)
@@ -52,6 +53,7 @@ class GoalsController < ApplicationController
     @goal.errors.add(:base, e.record.errors.full_messages.join) if e.record.is_a?(SmallGoal)
     render :edit, status: :unprocessable_entity
   end
+  # rubocop:enable Metrics/AbcSize
 
   def destroy
     @goal.destroy
