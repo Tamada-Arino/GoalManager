@@ -42,6 +42,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(%i[target_date progress_value content])
+    params.require(:report).permit(%i[target_date progress_value content small_goal_id])
   end
 end
