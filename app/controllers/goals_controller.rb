@@ -45,7 +45,8 @@ class GoalsController < ApplicationController
     @goal.assign_attributes(goal_params)
 
     ActiveRecord::Base.transaction do
-      change_small_goals(@goal, small_goals_attributes)
+      destroy_small_goals(@goal, small_goals_attributes)
+      update_or_create_small_goals(@goal, small_goals_attributes)
       @goal.save!
     end
     redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
@@ -81,13 +82,6 @@ class GoalsController < ApplicationController
     end
   end
 
-  def change_small_goals(goal, small_goals_attributes)
-    destroy_small_goals(goal, small_goals_attributes)
-    return if small_goals_attributes.blank?
-
-    update_or_create_small_goals(goal, small_goals_attributes)
-  end
-
   def destroy_small_goals(goal, small_goals_attributes)
     entered_small_goals = small_goals_attributes&.values&.pluck(:id)&.map(&:to_i) || []
 
@@ -95,16 +89,22 @@ class GoalsController < ApplicationController
   end
 
   def update_or_create_small_goals(goal, small_goals_attributes)
+    return if small_goals_attributes.blank?
+
     small_goals_attributes.each_value do |small_goal_params|
       if small_goal_params.key?(:id)
         update_small_goals(goal, small_goal_params)
       else
-        goal.small_goals.create!(
-          title: small_goal_params[:title],
-          achievable: small_goal_params[:achievable]
-        )
+        create_small_goals(goal, small_goal_params)
       end
     end
+  end
+
+  def create_small_goals(goal, small_goal_params)
+    goal.small_goals.create!(
+      title: small_goal_params[:title],
+      achievable: small_goal_params[:achievable]
+    )
   end
 
   def update_small_goals(goal, small_goal_params)
