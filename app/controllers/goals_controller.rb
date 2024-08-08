@@ -48,7 +48,7 @@ class GoalsController < ApplicationController
       redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
     end
   rescue ActiveRecord::RecordInvalid => e
-    @goal.errors.add(:base, e.record.errors.full_messages.join)
+    @goal.errors.add(:base, e.record.errors.full_messages.join) if e.record.is_a?(SmallGoal)
     render :edit, status: :unprocessable_entity
   end
 
