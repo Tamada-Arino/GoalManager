@@ -41,15 +41,14 @@ class GoalsController < ApplicationController
 
   def update
     small_goals_attributes = params.dig(:goal, :small_goals_attributes)
-    existed_small_goals = @goal.small_goals.pluck(:id)
-    entered_small_goals = entered_small_goals_ids(small_goals_attributes)
 
     ActiveRecord::Base.transaction do
-      update_small_goals(@goal, small_goals_attributes, existed_small_goals, entered_small_goals)
+      change_small_goals(@goal, small_goals_attributes)
       @goal.update!(goal_params)
       redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
     end
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid => e
+    @goal.errors.add(:base, e.record.errors.full_messages.join(''))
     render :edit, status: :unprocessable_entity
   end
 
@@ -79,6 +78,16 @@ class GoalsController < ApplicationController
     end
   end
 
+  def change_small_goals(goal, small_goals_attributes)
+    existed_small_goals = goal.small_goals.pluck(:id)
+    entered_small_goals = entered_small_goals_ids(small_goals_attributes)
+
+    remove_small_goals = existed_small_goals - entered_small_goals
+    goal.small_goals.where(id: remove_small_goals).destroy_all
+
+    update_or_create_small_goals(goal, small_goals_attributes)
+  end
+
   def entered_small_goals_ids(small_goals_attributes)
     entered_small_goals = []
     small_goals_attributes.each do |_key, params|
@@ -88,23 +97,28 @@ class GoalsController < ApplicationController
     entered_small_goals
   end
 
-  def update_small_goals(goal, small_goals_attributes, existed_small_goals, entered_small_goals)
-    remove_small_goals = existed_small_goals - entered_small_goals
-    goal.small_goals.where(id: remove_small_goals).destroy_all
-
+  def update_or_create_small_goals(goal, small_goals_attributes)
     small_goals_attributes.each do |_key, small_goal_params|
       if small_goal_params.has_key?(:id)
-        small_goal = goal.small_goals.find(small_goal_params[:id].to_i)
-        small_goal.update!(
-          title: small_goal_params[:title],
-          achievable: small_goal_params[:achievable]
-        )
+        update_small_goals(goal, small_goal_params)
       else
-        goal.small_goals.create!(
-          title: small_goal_params[:title],
-          achievable: small_goal_params[:achievable]
-        )
+        create_small_goals(goal, small_goal_params)
       end
     end
+  end
+
+  def update_small_goals(goal, small_goal_params)
+    small_goal = goal.small_goals.find(small_goal_params[:id].to_i)
+    small_goal.update!(
+      title: small_goal_params[:title],
+      achievable: small_goal_params[:achievable]
+    )
+  end
+
+  def create_small_goals(goal, small_goal_params)
+    goal.small_goals.create!(
+      title: small_goal_params[:title],
+      achievable: small_goal_params[:achievable]
+    )
   end
 end
