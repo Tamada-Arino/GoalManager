@@ -50,6 +50,10 @@ ul
               tr
                 th 実行日
                 td = report.target_date
+              - if report.small_goal.present?
+                tr
+                  th 小目標
+                  td = report.small_goal.title
               tr
                 th 達成度
                 td = report.progress_value
