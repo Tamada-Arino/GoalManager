@@ -27,16 +27,13 @@ table
     tr
       th 達成日
       td = @goal.end_date
+h4 小目標
 table
-  thead
+  - @small_goals.each do |small_goal|
     tr
-      th タイトル
-      th ステータス
-  tbody
-    - @small_goals.each do |small_goal|
-      tr
-        th = small_goal.title
-        td = small_goal.achievable ? '達成済み' : '未達成'
+      th = small_goal.achievable ? 'DONE!!' : 'unfinished...'
+      td = small_goal.title
+
 = link_to '編集する', edit_goal_path(@goal), class: 'button'
 h3 日報一覧
 = link_to '日報作成', new_goal_report_path(@goal), class: 'button'
