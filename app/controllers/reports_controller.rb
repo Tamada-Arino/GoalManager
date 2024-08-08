@@ -5,12 +5,10 @@ class ReportsController < ApplicationController
 
   def new
     @report = @goal.reports.new
-    @small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
   end
 
   def edit
     @report = @goal.reports.find(params[:id])
-    @small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
   end
 
   def create
@@ -18,7 +16,6 @@ class ReportsController < ApplicationController
     if @report.save
       redirect_to @goal, notice: t('notice.create', content: Report.model_name.human)
     else
-      @small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,7 +25,6 @@ class ReportsController < ApplicationController
     if @report.update(report_params)
       redirect_to @goal, notice: t('notice.update', content: Report.model_name.human)
     else
-      @small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
       render :edit, status: :unprocessable_entity
     end
   end
