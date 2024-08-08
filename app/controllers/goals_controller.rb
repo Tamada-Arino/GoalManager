@@ -52,7 +52,7 @@ class GoalsController < ApplicationController
     end
     redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
   rescue ActiveRecord::RecordInvalid => e
-    @goal.errors.add(:base, e.record.errors.full_messages.join) if e.record.is_a?(SmallGoal)
+    move_small_goals_error(@goal, e)
     render :edit, status: :unprocessable_entity
   end
   # rubocop:enable Metrics/AbcSize
@@ -115,5 +115,11 @@ class GoalsController < ApplicationController
       title: small_goal_params[:title],
       achievable: small_goal_params[:achievable]
     )
+  end
+
+  def move_small_goals_error(goal, error = nil)
+    if error.record.is_a?(SmallGoal)
+      goal.errors.add(:base, error.record.errors.full_messages.join)
+    end
   end
 end
