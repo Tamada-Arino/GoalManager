@@ -41,10 +41,11 @@ class GoalsController < ApplicationController
 
   def update
     small_goals_attributes = params.dig(:goal, :small_goals_attributes)
+    @goal.assign_attributes(goal_params)
 
     ActiveRecord::Base.transaction do
       change_small_goals(@goal, small_goals_attributes)
-      @goal.update!(goal_params)
+      @goal.save!
       redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
     end
   rescue ActiveRecord::RecordInvalid => e
