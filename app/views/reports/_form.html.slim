@@ -8,6 +8,12 @@
               value: f.object.target_date || Time.zone.today
       .form
         tr
+          th = f.label :small_goal_id
+          td = f.select :small_goal_id,
+               options_for_select(goal.small_goals.order(:created_at).pluck(:title, :id)),
+               include_blank: '紐づける小目標を選択'
+      .form
+        tr
           th = f.label :progress_value
           td
             - progress_value = f.object.progress_value || 50
