@@ -15,6 +15,7 @@ ja:
         content: 本文
         target_date: 実行日
         progress_value: 達成度
+        small_goal_id: 小目標
       small_goal:
         title: 小目標タイトル
         achievable: 達成済み
