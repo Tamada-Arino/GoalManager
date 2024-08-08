@@ -8,8 +8,8 @@ class SmallGoal < ApplicationRecord
   has_many :reports, dependent: :nullify
 
   def validate_small_goal_count
-    if goal.small_goals.count > 3
-      goal.errors.add(:base, :over_small_goals_count)
-    end
+    return unless goal.small_goals.count > 3
+
+    goal.errors.add(:base, :over_small_goals_count)
   end
 end

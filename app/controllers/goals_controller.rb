@@ -48,7 +48,7 @@ class GoalsController < ApplicationController
       redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
     end
   rescue ActiveRecord::RecordInvalid => e
-    @goal.errors.add(:base, e.record.errors.full_messages.join(''))
+    @goal.errors.add(:base, e.record.errors.full_messages.join)
     render :edit, status: :unprocessable_entity
   end
 
@@ -90,16 +90,17 @@ class GoalsController < ApplicationController
 
   def entered_small_goals_ids(small_goals_attributes)
     entered_small_goals = []
-    small_goals_attributes.each do |_key, params|
+    small_goals_attributes.each_value do |params|
       next if params[:id].blank?
+
       entered_small_goals << params[:id].to_i
     end
     entered_small_goals
   end
 
   def update_or_create_small_goals(goal, small_goals_attributes)
-    small_goals_attributes.each do |_key, small_goal_params|
-      if small_goal_params.has_key?(:id)
+    small_goals_attributes.each_value do |small_goal_params|
+      if small_goal_params.key?(:id)
         update_small_goals(goal, small_goal_params)
       else
         create_small_goals(goal, small_goal_params)
