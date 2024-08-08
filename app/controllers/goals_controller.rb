@@ -40,6 +40,7 @@ class GoalsController < ApplicationController
   end
 
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def update
     small_goals_attributes = params.dig(:goal, :small_goals_attributes)
     @goal.assign_attributes(goal_params)
@@ -55,6 +56,7 @@ class GoalsController < ApplicationController
     render :edit, status: :unprocessable_entity
   end
   # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def destroy
     @goal.destroy
