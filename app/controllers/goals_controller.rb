@@ -82,11 +82,9 @@ class GoalsController < ApplicationController
   end
 
   def change_small_goals(goal, small_goals_attributes)
-    existed_small_goals = goal.small_goals.pluck(:id)
-    entered_small_goals = small_goals_attributes.values.pluck(:id).map(&:to_i)
+    entered_small_goals = small_goals_attributes&.values&.pluck(:id)&.map(&:to_i) || []
 
-    remove_small_goals = existed_small_goals - entered_small_goals
-    goal.small_goals.where(id: remove_small_goals).destroy_all
+    goal.small_goals.where.not(id: entered_small_goals).destroy_all
     return if small_goals_attributes.blank?
 
     update_or_create_small_goals(goal, small_goals_attributes)
