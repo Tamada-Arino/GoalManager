@@ -109,7 +109,10 @@ class GoalsController < ApplicationController
       if small_goal_params.key?(:id)
         update_small_goals(goal, small_goal_params)
       else
-        create_small_goals(goal, small_goal_params)
+        goal.small_goals.create!(
+          title: small_goal_params[:title],
+          achievable: small_goal_params[:achievable]
+        )
       end
     end
   end
@@ -117,13 +120,6 @@ class GoalsController < ApplicationController
   def update_small_goals(goal, small_goal_params)
     small_goal = goal.small_goals.find(small_goal_params[:id].to_i)
     small_goal.update!(
-      title: small_goal_params[:title],
-      achievable: small_goal_params[:achievable]
-    )
-  end
-
-  def create_small_goals(goal, small_goal_params)
-    goal.small_goals.create!(
       title: small_goal_params[:title],
       achievable: small_goal_params[:achievable]
     )
