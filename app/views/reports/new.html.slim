@@ -1,4 +1,4 @@
 h3 日報作成
 = render 'shared/errors', obj: @report
 - small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
-= render 'form', models: [@goal, @report], small_goals: small_goals
+= render 'form', models: [@goal, @report], small_goals:
