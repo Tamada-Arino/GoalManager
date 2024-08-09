@@ -18,10 +18,17 @@
     = f.radio_button :color, '#ff0000',
       checked: goal.new_record? || goal.color == '#ff0000'
     = f.label :color_red, '赤'
-    = f.radio_button :color, '#00ff00'
+    = f.radio_button :color, '#00ff00', checked: goal.color == '#00ff00'
     = f.label :color_green, '緑'
-    = f.radio_button :color, '#0000ff'
+    = f.radio_button :color, '#0000ff', checked: goal.color == '#0000ff'
     = f.label :color_blue, '青'
+    = f.radio_button :color, goal.new_record? ? '#ff0000' : goal.color,
+                      data: { color_target: 'radioButton' }
+      checked: goal.persisted? && %w[#ff0000 #00ff00 #0000ff].exclude?(goal.color)
+    = f.label :custom_color, 'カスタム'
+    = f.color_field :custom_color,
+                    value: goal.new_record? ? '#ff0000' : goal.color,
+                    data: { color_target: 'colorPicker', action: 'input->color#changeColorValue' }
   - if goal.persisted?
     .form
       = f.label :interrupted
