@@ -6,11 +6,13 @@ class Report < ApplicationRecord
   validate :progress_date_check
 
   belongs_to :goal
-  belongs_to :small_goal
+  belongs_to :small_goal, optional: true
 
   private
 
   def progress_date_check
+    return if target_date.blank?
+
     if target_date < goal.start_date
       errors.add(:target_date, :start_date_invalid)
     elsif goal.end_date.present? && target_date > goal.end_date
