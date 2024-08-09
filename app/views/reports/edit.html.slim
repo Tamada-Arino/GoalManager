@@ -1,7 +1,8 @@
 h3 日報編集
 = render 'shared/errors', obj: @report
 - small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
-= render 'form', models: [@goal, @report], small_goals:
+= render 'form', models: [@goal, @report],
+  small_goals:, existed_small_goal_id: @report.small_goal_id
 = link_to '削除する', goal_report_path(@goal.id, @report),
   data: { turbo_method: :delete,
   turbo_confirm: 'この日報を削除してもよろしいですか？' },
