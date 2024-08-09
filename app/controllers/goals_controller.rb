@@ -116,9 +116,13 @@ class GoalsController < ApplicationController
     )
   end
 
-  def move_small_goals_error(goal, error = nil)
-    if error.record.is_a?(SmallGoal)
-      goal.errors.add(:base, error.record.errors.full_messages.join)
+  def move_small_goals_error(error = nil)
+    if error
+      @goal.errors.add(:base, error.record.errors.full_messages.join) if error.record.is_a?(SmallGoal)
+    else
+      @goal.small_goals.each do |sg|
+        @goal.errors.add(:base, sg.errors.full_messages.join) if sg.errors.present?
+      end
     end
   end
 end
