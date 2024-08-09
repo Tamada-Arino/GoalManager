@@ -40,11 +40,17 @@ class GoalsController < ApplicationController
   end
 
   def update
-    if @goal.update(goal_params)
-      redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
-    else
-      render :edit, status: :unprocessable_entity
+    @goal.assign_attributes(goal_params)
+
+    ActiveRecord::Base.transaction do
+      destroy_small_goals
+      update_or_create_small_goals
+      @goal.save!
     end
+    redirect_to @goal, notice: t('notice.update', content: Goal.model_name.human)
+  rescue ActiveRecord::RecordInvalid => e
+    move_small_goals_error(e)
+    render :edit, status: :unprocessable_entity
   end
 
   def destroy
@@ -71,5 +77,46 @@ class GoalsController < ApplicationController
         achievable: small_goal_params[:achievable]
       )
     end
+  end
+
+  def small_goals_attributes
+    @small_goals_attributes ||= params.dig(:goal, :small_goals_attributes)
+  end
+
+  def destroy_small_goals
+    entered_small_goals = small_goals_attributes&.reject { |_, v| v[:id].blank? } || []
+
+    @goal.small_goals.where.not(id: entered_small_goals).destroy_all
+  end
+
+  def update_or_create_small_goals
+    return if small_goals_attributes.blank?
+
+    small_goals_attributes.each_value do |small_goal_params|
+      if small_goal_params.key?(:id)
+        update_small_goals(small_goal_params)
+      else
+        create_small_goals(small_goal_params)
+      end
+    end
+  end
+
+  def create_small_goals(small_goal_params)
+    @goal.small_goals.create!(
+      title: small_goal_params[:title],
+      achievable: small_goal_params[:achievable]
+    )
+  end
+
+  def update_small_goals(small_goal_params)
+    small_goal = @goal.small_goals.find(small_goal_params[:id].to_i)
+    small_goal.update!(
+      title: small_goal_params[:title],
+      achievable: small_goal_params[:achievable]
+    )
+  end
+
+  def move_small_goals_error(error)
+    @goal.errors.add(:base, error.record.errors.full_messages.join) if error.record.is_a?(SmallGoal)
   end
 end

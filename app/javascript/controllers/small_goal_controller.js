@@ -6,6 +6,7 @@ export default class extends Controller {
 
   connect() {
     this.index = 0;
+    this.updateButtonState();
   }
 
   insertHtml() {
