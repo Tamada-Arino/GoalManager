@@ -11,7 +11,7 @@
           tr
             th = f.label :small_goal_id
             td = f.select :small_goal_id,
-                  options_for_select(small_goals, existed_small_goal_id),
+                  options_for_select(small_goals, f.object.small_goal_id),
                   include_blank: '紐づける小目標を選択'
       .form
         tr
