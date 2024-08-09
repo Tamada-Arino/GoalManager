@@ -116,6 +116,7 @@ class GoalsController < ApplicationController
     )
   end
 
+  # rubocop:disable Metrics/AbcSize
   def move_small_goals_error(error = nil)
     if error
       @goal.errors.add(:base, error.record.errors.full_messages.join) if error.record.is_a?(SmallGoal)
@@ -125,4 +126,5 @@ class GoalsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize
 end
