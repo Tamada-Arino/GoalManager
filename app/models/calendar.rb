@@ -31,12 +31,9 @@ class Calendar
   end
 
   def generate_sample
-    sample_numbers = ['', 25, 50,75, 100]
-    sample_array = []
-    sample_numbers.each do |sample|
-      sample_array << target_date_datas(sample)
+    ['', 25, 50,75, 100].map do |sample|
+      target_date_datas(sample)
     end
-    sample_array
   end
 
   private
