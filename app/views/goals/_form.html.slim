@@ -28,7 +28,7 @@
     = f.label :custom_color, 'カスタム'
     = f.color_field :custom_color,
                     value: goal.new_record? ? '#ff0000' : goal.color,
-                    data: { color_target: 'colorPicker', action: 'input->color#changeColorValue' }
+                    data: { action: 'input->color#changeColorValue' }
   - if goal.persisted?
     .form
       = f.label :interrupted
