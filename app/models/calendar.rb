@@ -31,7 +31,7 @@ class Calendar
   end
 
   def generate_sample
-    ['', 25, 50,75, 100].map do |sample|
+    ['', 25, 50, 75, 100].map do |sample|
       target_date_datas(sample)
     end
   end
