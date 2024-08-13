@@ -6,12 +6,18 @@ table.calendar_table
   tr
     - weekday.each do |wday|
       td.table_text = wday
-  - @calendar.each do |week|
+  - @monthry_calendar.each do |week|
     tr
       - week.each do |date|
         td style="#{ date[:style] }" class="#{ date[:class] } table_cell"
           - if date[:target_date].present?
             p.date_bubble = date[:target_date]
+table.calendar_line
+  tr
+    td.table_text  less
+    - @sample_calendar.each do |cell|
+      td style="#{ cell[:style] }" class="#{ cell[:class] } table_cell"
+    td.table_text  more
 table
   tr
     th ステータス
