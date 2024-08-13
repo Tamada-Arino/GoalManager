@@ -22,9 +22,10 @@
     = f.label :color_green, '緑'
     = f.radio_button :color, '#0000ff', checked: goal.color == '#0000ff'
     = f.label :color_blue, '青'
+    - basic_colors = %w[#ff0000 #00ff00 #0000ff]
     = f.radio_button :color, goal.new_record? ? '#ff0000' : goal.color,
                       data: { color_target: 'radioButton' },
-      checked: goal.persisted? && %w[#ff0000 #00ff00 #0000ff].exclude?(goal.color)
+      checked: goal.persisted? && basic_colors.exclude?(goal.color)
     = f.label :custom_color, 'カスタム'
     = f.color_field :custom_color,
                     value: goal.new_record? ? '#ff0000' : goal.color,
