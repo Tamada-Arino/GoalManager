@@ -30,6 +30,15 @@ class Calendar
     end
   end
 
+  def generate_sample
+    sample_numbers = ['', 25, 50,75, 100]
+    sample_array = []
+    sample_numbers.each do |sample|
+      sample_array << target_date_datas(sample)
+    end
+    sample_array
+  end
+
   private
 
   attr_reader :goal, :range, :range_last_date, :range_start_date, :target_reports
@@ -52,12 +61,12 @@ class Calendar
     reports_hash
   end
 
-  def target_date_datas(progress_value, target_date)
+  def target_date_datas(progress_value, target_date = nil)
     date_datas = { class: 'date_cell' }
     if progress_value.present?
       status_number = build_status_number(progress_value)
       date_datas[:style] = "background-color: #{get_rgba(@goal.color, status_number)}"
-      date_datas[:target_date] = target_date
+      date_datas[:target_date] = target_date if target_date.present?
     end
 
     date_datas
