@@ -11,13 +11,15 @@ export default class extends Controller {
 
   insertHtml() {
     const html = `
-      <div class="form small_goals">
+      <div class="control small_goals">
         <label>小目標</label>
         <br>
         <input type="text" name="goal[small_goals_attributes][${this.index}][title]" />
         <input type="checkbox" name="goal[small_goals_attributes][${this.index}][achievable]" />
         <label>達成済み</label>
-        <button type="button" data-action="click->small-goal#removeHtml">削除</button>
+        <button type="button" class="button is-danger is-light is-small" data-action="click->small-goal#removeHtml">
+          削除
+        </button>
       </div>
     `;
     this.formsTarget.insertAdjacentHTML('beforeend', html);
