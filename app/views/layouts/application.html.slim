@@ -34,10 +34,14 @@ html
             = link_to '新規登録', new_user_registration_path,
               class: 'button is-small'
     - if notice
-      .notification.is-success.is-light
-        p.notice = notice
+      .notification.is-success.is-light.has-text-centered
+        p.notice
+          i class='fa-solid fa-circle-exclamation'
+          = notice
     - if alert
-      .notification.is-danger.is-light
-        p.alert = alert
+      .notification.is-danger.is-light.has-text-centered
+        p.alert
+          i class='fa-solid fa-circle-xmark'
+          = alert
     .container
       = yield
