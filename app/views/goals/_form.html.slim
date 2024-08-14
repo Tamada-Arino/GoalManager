@@ -24,7 +24,7 @@
     = f.label :color_green, '緑'
     = f.radio_button :color, '#0000ff', checked: default_color == '#0000ff'
     = f.label :color_blue, '青'
-    = f.radio_button :color, f.object.color || defalut_color,
+    = f.radio_button :color, f.object.color || default_color,
                       data: { color_target: 'radioButton' },
       checked: basic_colors.exclude?(f.object.color)
     = f.label :custom_color, 'カスタム'
