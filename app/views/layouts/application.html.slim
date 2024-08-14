@@ -11,7 +11,8 @@ html
     = yield(:js)
   body.has-navbar-fixed-top
     header [class='navbar is-fixed-top has-background-grey-lighter']
-      h1 = link_to 'GoalSupporter', root_path
+      h1 = link_to root_path do
+        = image_tag 'logo.png', class: 'logo'
       .is-flex
         - if user_signed_in?
           - if current_user.avatar.attached?
