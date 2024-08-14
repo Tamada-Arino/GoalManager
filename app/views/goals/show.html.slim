@@ -33,13 +33,13 @@ table
     tr
       th 達成日
       td = @goal.end_date
-h4 小目標
-table
-  - @small_goals.each do |small_goal|
-    tr
-      th = small_goal.achievable ? 'DONE!!' : 'unfinished...'
-      td = small_goal.title
-
+- if @small_goals.present?
+  h4.is-size-5 小目標
+  table
+    - @small_goals.each do |small_goal|
+      tr
+        th = small_goal.achievable ? 'DONE!!' : 'unfinished...'
+        td = small_goal.title
 = link_to '編集する', edit_goal_path(@goal), class: 'button'
 .mt-4
   h3.is-size-5 日報一覧
