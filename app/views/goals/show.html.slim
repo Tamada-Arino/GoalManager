@@ -41,32 +41,33 @@ table
       td = small_goal.title
 
 = link_to '編集する', edit_goal_path(@goal), class: 'button'
-h3 日報一覧
-= link_to '日報作成', new_goal_report_path(@goal), class: 'button'
-ul
-  - @reports.each do |report|
-    li
-      button.js-modal-trigger data-target="report-modal-#{report.id}"
-        = report.target_date
-      .modal id="report-modal-#{report.id}"
-        .modal-background
-        .modal-content
-          .box
-            table
-              tr
-                th 実行日
-                td = report.target_date
-              - if report.small_goal.present?
+.mt-4
+  h3.is-size-5 日報一覧
+  = link_to '日報作成', new_goal_report_path(@goal), class: 'button'
+  ul
+    - @reports.each do |report|
+      li
+        button.js-modal-trigger.mt-2 data-target="report-modal-#{report.id}"
+          = report.target_date
+        .modal id="report-modal-#{report.id}"
+          .modal-background
+          .modal-content
+            .box
+              table
                 tr
-                  th 小目標
-                  td = report.small_goal.title
-              tr
-                th 達成度
-                td = report.progress_value
-              tr
-                td colspan=2
-                  = report.content.truncate(30)
-            = link_to '編集する', edit_goal_report_path(@goal.id, report),
-              class: 'button'
-        button.modal-close.is-large aria-label="close"
-= paginate @reports
+                  th 実行日
+                  td = report.target_date
+                - if report.small_goal.present?
+                  tr
+                    th 小目標
+                    td = report.small_goal.title
+                tr
+                  th 達成度
+                  td = report.progress_value
+                tr
+                  td colspan=2
+                    = report.content.truncate(30)
+              = link_to '編集する', edit_goal_report_path(@goal.id, report),
+                class: 'button'
+          button.modal-close.is-large aria-label="close"
+  = paginate @reports
