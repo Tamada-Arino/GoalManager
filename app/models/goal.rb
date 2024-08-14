@@ -3,8 +3,8 @@
 class Goal < ApplicationRecord
   validates :title, presence: true
   validates :start_date, presence: true
-  validates :color, presence: true
-  validate :color_check
+  validates :color, presence: true,
+                    format: { with: /\A#(?:[0-9a-fA-F]{3}){1,2}\z/, message: :invalid_color }
   validate :start_date_check
   validate :small_goals_achievable_check
   after_validation :remove_small_goal_errors
@@ -33,13 +33,6 @@ class Goal < ApplicationRecord
 
       errors.add(target_date, :start_date_invalid)
     end
-  end
-
-  def color_check
-    colors = %w[#ff0000 #00ff00 #0000ff]
-    return if colors.include?(color)
-
-    errors.add(color, :invalid_color)
   end
 
   def small_goals_achievable_check

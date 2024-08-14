@@ -17,7 +17,9 @@ class GoalsController < ApplicationController
   def show
     @small_goals = @goal.small_goals.order(:created_at)
     @reports = @goal.reports.includes(:small_goal).order(target_date: :DESC).page(params[:page])
-    @calendar = Calendar.new(@goal, CALENDAR_MONTHS.months).generate_calendar
+    @calendar = Calendar.new(@goal, CALENDAR_MONTHS.months)
+    @monthry_calendar = @calendar.generate_calendar
+    @sample_calendar = @calendar.generate_sample
   end
 
   def new
