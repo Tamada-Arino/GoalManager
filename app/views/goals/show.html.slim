@@ -1,6 +1,6 @@
 - content_for :js do
   = javascript_import_module_tag 'bulma_modal'
-h3 = @goal.title
+h3.is-size-4 = @goal.title
 = link_to '目標一覧へ戻る', root_path
 table.calendar_table
   tr
