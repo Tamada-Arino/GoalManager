@@ -1,8 +1,10 @@
 - content_for :js do
   = javascript_import_module_tag 'bulma_modal'
-h3.is-size-4 = @goal.title
+.is-flex.is-justify-content-space-between
+  h3.is-size-4 = @goal.title
+  = link_to '編集する', edit_goal_path(@goal), class: 'button'
 = link_to '目標一覧へ戻る', root_path
-table.calendar_table
+table.calendar_table.mt-3
   tr
     - weekday.each do |wday|
       td.table_text = wday
@@ -12,13 +14,13 @@ table.calendar_table
         td style="#{ date[:style] }" class="#{ date[:class] } table_cell"
           - if date[:target_date].present?
             p.date_bubble = date[:target_date]
-table.calendar_line
+table.calendar_line.mt-2
   tr
     td.table_text  less
     - @sample_calendar.each do |cell|
       td style="#{ cell[:style] }" class="#{ cell[:class] } table_cell"
     td.table_text  more
-table
+table.mt-3
   tr
     th ステータス
     td = @goal.status
@@ -40,7 +42,6 @@ table
       tr
         th = small_goal.achievable ? 'DONE!!' : 'unfinished...'
         td = small_goal.title
-= link_to '編集する', edit_goal_path(@goal), class: 'button'
 .mt-4
   h3.is-size-5 日報一覧
   = link_to new_goal_report_path(@goal),
@@ -48,7 +49,7 @@ table
     i class='fa-regular fa-square-plus' 日報作成
   ul
     - @reports.each do |report|
-      li
+      li.ml-3
         button.js-modal-trigger.mt-2 data-target="report-modal-#{report.id}"
           = report.target_date
         .modal id="report-modal-#{report.id}"
