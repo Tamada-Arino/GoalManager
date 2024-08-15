@@ -18,6 +18,7 @@ header.navbar.is-fixed-top.has-background-grey-lighter
     .dropdown-menu
       .dropdown-content
         - if user_signed_in?
+          = link_to '目標一覧', root_path, class: 'dropdown-item'
           = link_to '登録情報', edit_user_registration_path,
             class: 'dropdown-item'
           = link_to 'ログアウト', destroy_user_session_path,
