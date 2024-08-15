@@ -12,7 +12,7 @@ html
     = javascript_importmap_tags
     = yield(:js)
   body.has-navbar-fixed-top
-    header [class='navbar is-fixed-top has-background-grey-lighter']
+    header.navbar.is-fixed-top.has-background-grey-lighter
       h1 = link_to root_path do
         = image_tag 'logo.png', class: 'logo'
       .is-flex.is-hidden-tablet.header_content
@@ -41,7 +41,7 @@ html
     - if alert
       .notification.is-danger.is-light.has-text-centered
         p.alert
-          i class='fa-solid fa-circle-xmark'
+          i.fa-solid.fa-circle-xmark
           = alert
     .container.columns
       .column.is-one-quarter.is-hidden-mobile
