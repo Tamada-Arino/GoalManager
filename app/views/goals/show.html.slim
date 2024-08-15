@@ -4,7 +4,7 @@
   h3.is-size-4 = @goal.title
   = link_to '編集する', edit_goal_path(@goal), class: 'button'
 = link_to '目標一覧へ戻る', root_path
-table.calendar_table.mt-3
+table.calendar_table.mt-3.mx-5
   tr
     - weekday.each do |wday|
       td.table_text = wday
@@ -14,7 +14,7 @@ table.calendar_table.mt-3
         td style="#{ date[:style] }" class="#{ date[:class] } table_cell"
           - if date[:target_date].present?
             p.date_bubble = date[:target_date]
-table.calendar_line.mt-2
+table.calendar_line.mt-2.mx-5
   tr
     td.table_text  less
     - @sample_calendar.each do |cell|
