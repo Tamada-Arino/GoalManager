@@ -28,6 +28,6 @@ h2.is-size-4
     br
     = f.password_field :password_confirmation,
       autocomplete: 'new-password', class: 'input'
-  .m-3
-    = f.submit t('.sign_up'), class: 'button is-success m-3'
+  .control.m-3
+    = f.submit t('.sign_up'), class: 'button is-success'
 = render 'devise/shared/links'
