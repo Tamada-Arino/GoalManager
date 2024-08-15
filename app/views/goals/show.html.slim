@@ -44,7 +44,7 @@ table
 .mt-4
   h3.is-size-5 日報一覧
   = link_to new_goal_report_path(@goal),
-    class: 'button add_button is-rounded is-size-6' do
+    class: 'button add_button is-rounded is-success is-light is-size-5' do
     i class='fa-regular fa-square-plus' 日報作成
   ul
     - @reports.each do |report|
