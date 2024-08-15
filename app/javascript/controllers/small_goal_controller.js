@@ -11,7 +11,7 @@ export default class extends Controller {
 
   insertHtml() {
     const html = `
-      <div class="control small_goals">
+      <div class="control small_goals mx-3">
         <label>小目標</label>
         <br>
         <input type="text" name="goal[small_goals_attributes][${this.index}][title]" />

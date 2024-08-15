@@ -48,7 +48,7 @@
       | 小目標を追加
   div data-small-goal-target='forms'
     - goal.small_goals.each_with_index do |small_goal, i|
-      .control.small_goals
+      .control.small_goals.mx-3
         label 小目標
         br
         = f.text_field :small_goals_attributes,
