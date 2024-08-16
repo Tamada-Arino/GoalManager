@@ -5,7 +5,10 @@ h3.is-size-4 目標一覧
 ul
   - @goals.each_with_index do |goal, i|
     li.box = link_to goal_path(goal) do
-      p #{goal.title} - #{goal.status}
+      p
+        span class="#{goal.status[:class]}"
+          = goal.status[:text]
+        = " #{goal.title}"
       table.calendar_line
         tr
           - @calendars[i].each do |date|

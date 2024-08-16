@@ -15,13 +15,13 @@ class Goal < ApplicationRecord
 
   def status
     if end_date.present?
-      '完了'
+      { text: '完了', class: 'tag is-success' }
     elsif interrupted
-      '中断中'
+      { text: '中断中', class: 'tag is-warning' }
     elsif start_date > Time.zone.today
-      '開始前'
+      { text: '開始前', class: 'tag is-light' }
     else
-      '進行中'
+      { text: '進行中', class: 'tag is-primary' }
     end
   end
 
