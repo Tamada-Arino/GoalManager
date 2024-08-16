@@ -35,7 +35,8 @@
     = f.label :custom_color, 'カスタム', class: 'mr-1'
     = f.color_field :custom_color,
                     value: f.object.color || default_color,
-                    data: { action: 'input->color#changeColorValue' }
+                    data: { color_target: 'customColor',
+                    action: 'input->color#changeColorValue' }
     table.calendar_line.mt-2
       tr
         - (0..4).each do |status|
