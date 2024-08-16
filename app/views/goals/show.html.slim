@@ -60,20 +60,18 @@ table.calendar_line.mt-2.mx-5
           .modal-background
           .modal-content
             .box
-              table
-                tr
-                  th 実行日
-                  td = report.target_date
-                - if report.small_goal.present?
-                  tr
-                    th 小目標
-                    td = report.small_goal.title
-                tr
-                  th 達成度
-                  td = report.progress_value
-                tr
-                  td colspan=2
-                    = report.content.truncate(30)
+              p.my-2
+                span.mr-4 実行日
+                = report.target_date
+              - if report.small_goal.present?
+                p.my-2
+                  span.mr-4 小目標
+                  = report.small_goal.title
+              p.my-2
+                span.mr-4 達成度
+                = report.progress_value
+              p.my-2
+                = report.content
               .mt-2.is-flex.is-justify-content-right
                 = link_to '編集', edit_goal_report_path(@goal.id, report),
                   class: 'button is-info'
