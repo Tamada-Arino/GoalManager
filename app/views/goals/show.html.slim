@@ -4,6 +4,21 @@
   h3.is-size-4 = @goal.title
   = link_to '編集する', edit_goal_path(@goal), class: 'button'
 = link_to '目標一覧へ戻る', root_path
+table.mt-3
+  tr
+    th ステータス
+    td = @goal.status
+  tr
+    th 開始日
+    td = @goal.start_date
+  - if @goal.schedules_end_date.present?
+    tr
+      th 終了予定日
+      td = @goal.schedules_end_date
+  - if @goal.end_date.present?
+    tr
+      th 達成日
+      td = @goal.end_date
 table.calendar_table.mt-3.mx-5
   tr
     - weekday.each do |wday|
@@ -20,23 +35,8 @@ table.calendar_line.mt-2.mx-5
     - @sample_calendar.each do |cell|
       td style="#{ cell[:style] }" class="#{ cell[:class] } table_cell"
     td.table_text  more
-table.mt-3
-  tr
-    th ステータス
-    td = @goal.status
-  tr
-    th 開始日
-    td = @goal.start_date
-  - if @goal.schedules_end_date.present?
-    tr
-      th 終了予定日
-      td = @goal.schedules_end_date
-  - if @goal.end_date.present?
-    tr
-      th 達成日
-      td = @goal.end_date
 - if @small_goals.present?
-  h4.is-size-5 小目標
+  h4.is-size-5.mt-3 小目標
   table
     - @small_goals.each do |small_goal|
       tr
