@@ -44,7 +44,11 @@ table.calendar_line.mt-2.mx-5
   table
     - @small_goals.each do |small_goal|
       tr
-        th = small_goal.achievable ? 'DONE!!' : 'unfinished...'
+        td
+          - if small_goal.achievable
+            span.tag.is-success.mr-2.mb-2 DONE!!
+          - else
+            span.tag.is-light.mr-2.mb-2 unfinished...
         td = small_goal.title
 .mt-4
   h3.is-size-5 日報一覧
