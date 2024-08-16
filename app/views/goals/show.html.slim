@@ -11,18 +11,18 @@
     = link_to '削除', goal_path(@goal), data: { turbo_method: :delete,
       turbo_confirm: "#{@goal.title}を削除してもよろしいですか？" },
       class: 'button is-danger has-text-white is-small ml-3'
-table.mt-3
-  tr
-    th 開始日
-    td = @goal.start_date
+.mt-3
+  p
+    span.mr-4 開始日
+    = @goal.start_date
   - if @goal.schedules_end_date.present?
-    tr
-      th 終了予定日
-      td = @goal.schedules_end_date
+    p
+      span.mr-4 終了予定日
+      = @goal.schedules_end_date
   - if @goal.end_date.present?
-    tr
-      th 達成日
-      td = @goal.end_date
+    p
+      span.mr-4 達成日
+      = @goal.end_date
 table.calendar_table.mt-3.mx-5
   tr
     - weekday.each do |wday|
