@@ -67,3 +67,13 @@ header {
 .header_content {
   align-items: center;
 }
+.main_content {
+  min-height: 100vh;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.sidebar_content {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 20px 0;
+}
