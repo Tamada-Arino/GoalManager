@@ -32,6 +32,10 @@
     = f.color_field :custom_color,
                     value: f.object.color || default_color,
                     data: { action: 'input->color#changeColorValue' }
+    table.calendar_line.mt-2
+      tr
+        - (0..4).each do |status|
+          td.date_cell id="sample_#{status}"
   - if goal.persisted?
     .control.m-3
       = f.label :interrupted
