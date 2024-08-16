@@ -1,11 +1,16 @@
 - content_for :js do
   = javascript_import_module_tag 'bulma_modal'
-.is-flex.is-justify-content-space-between
+.is-flex.is-justify-content-space-between.mt-2
   h3.is-size-4
     = "#{@goal.title} "
     span class="#{@goal.status[:class]}"
       = @goal.status[:text]
-  = link_to '編集する', edit_goal_path(@goal), class: 'button'
+  .is-flex
+    = link_to '編集', edit_goal_path(@goal),
+      class: 'button is-info is-small'
+    = link_to '削除', goal_path(@goal), data: { turbo_method: :delete,
+      turbo_confirm: "#{@goal.title}を削除してもよろしいですか？" },
+      class: 'button is-danger has-text-white is-small ml-3'
 table.mt-3
   tr
     th 開始日
