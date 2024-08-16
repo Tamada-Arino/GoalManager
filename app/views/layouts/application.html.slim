@@ -14,12 +14,12 @@ html
   body.has-navbar-fixed-top
     = render 'layouts/header'
     - if notice
-      .notification.is-success.is-light.has-text-centered
+      .notification.is-success.is-light.has-text-centered.mb-0
         p.notice
           i class='fa-solid fa-circle-exclamation'
           = notice
     - if alert
-      .notification.is-danger.is-light.has-text-centered
+      .notification.is-danger.is-light.has-text-centered.mb-0
         p.alert
           i.fa-solid.fa-circle-xmark
           = alert
