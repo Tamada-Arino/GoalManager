@@ -74,7 +74,12 @@ table.calendar_line.mt-2.mx-5
                 tr
                   td colspan=2
                     = report.content.truncate(30)
-              = link_to '編集する', edit_goal_report_path(@goal.id, report),
-                class: 'button mt-3'
+              .mt-2.is-flex.is-justify-content-right
+                = link_to '編集', edit_goal_report_path(@goal.id, report),
+                  class: 'button is-info'
+                = link_to '削除', goal_report_path(@goal.id, report),
+                  data: { turbo_method: :delete,
+                  turbo_confirm: 'この日報を削除してもよろしいですか？' },
+                  class: 'button is-danger has-text-white ml-2'
           button.modal-close.is-large aria-label="close"
   = paginate @reports
