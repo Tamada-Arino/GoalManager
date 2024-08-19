@@ -37,11 +37,11 @@
                     value: f.object.color || default_color,
                     data: { color_target: 'customColor',
                     action: 'input->color#changeColorValue' }
-    table.calendar_line.mt-1
+    table.calendar-line.mt-1
       tr
-        td.table_text カラーサンプル:
+        td.table-text カラーサンプル:
         - (0..4).each do |status|
-          td.date_cell id="sample_#{status}"
+          td.date-cell id="sample_#{status}"
   - if goal.persisted?
     .control.m-3
       = f.label :interrupted
