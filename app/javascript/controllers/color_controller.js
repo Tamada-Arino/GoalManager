@@ -47,14 +47,14 @@ export default class extends Controller {
   darkenColorValue(hex) {
     const darkenValue = 65
 
-    let r = parseInt(hex.slice(1, 3), 16)
-    let g = parseInt(hex.slice(3, 5), 16)
-    let b = parseInt(hex.slice(5, 7), 16)
+    const rgb = [
+      parseInt(hex.slice(1, 3), 16),
+      parseInt(hex.slice(3, 5), 16),
+      parseInt(hex.slice(5, 7), 16)
+    ]
 
-    r = Math.max(0, r - darkenValue)
-    g = Math.max(0, g - darkenValue)
-    b = Math.max(0, b - darkenValue)
+    const darkenedRgb = rgb.map(value => Math.max(0, value - darkenValue))
 
-    return `rgb(${r}, ${g}, ${b})`
+    return `rgb(${darkenedRgb.join(", ")})`
   }
 }
