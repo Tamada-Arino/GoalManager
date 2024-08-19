@@ -39,11 +39,9 @@ export default class extends Controller {
     this.applyStyles(cells.good, this.darkenColorValue(baseColor))
   }
 
-  applyStyles(cell, color, opacity) {
+  applyStyles(cell, color, opacity = 1) {
     cell.style.backgroundColor = color
-    if (opacity !== undefined) {
-      cell.style.opacity = opacity
-    }
+    cell.style.opacity = opacity
   }
 
   darkenColorValue(hex) {
