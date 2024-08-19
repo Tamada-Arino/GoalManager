@@ -59,7 +59,7 @@ class Calendar
   end
 
   def target_date_datas(progress_value, target_date = nil)
-    date_datas = { class: 'date_cell' }
+    date_datas = { class: 'date-cell' }
     if progress_value.present?
       status_number = build_status_number(progress_value)
       date_datas[:style] = "background-color: #{get_rgba(@goal.color, status_number)}"
@@ -80,7 +80,7 @@ class Calendar
 
     rgb_array = darken_color_value(rgb_array) if value == GOOD_STATUS
     opacity = get_opacity(value)
-    "rgba(#{rgb_array[0]}, #{rgb_array[1]}, #{rgb_array[2]}, #{opacity});"
+    "rgba(#{rgb_array[0]} #{rgb_array[1]} #{rgb_array[2]} / #{opacity});"
   end
 
   def get_opacity(value)
