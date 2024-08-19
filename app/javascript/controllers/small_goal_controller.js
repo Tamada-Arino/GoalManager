@@ -11,13 +11,13 @@ export default class extends Controller {
 
   insertHtml() {
     const html = `
-      <div class="form small_goals">
+      <div class="control small-goals mx-3 mb-3">
         <label>小目標</label>
         <br>
-        <input type="text" name="goal[small_goals_attributes][${this.index}][title]" />
-        <input type="checkbox" name="goal[small_goals_attributes][${this.index}][achievable]" />
-        <label>達成済み</label>
-        <button type="button" data-action="click->small-goal#removeHtml">削除</button>
+        <input type="text" class="input is-small small-goal-input" name="goal[small_goals_attributes][${this.index}][title]">
+        <button type="button" class="button is-danger is-light is-small" data-action="click->small-goal#removeHtml">
+          削除
+        </button>
       </div>
     `;
     this.formsTarget.insertAdjacentHTML('beforeend', html);
@@ -31,7 +31,7 @@ export default class extends Controller {
   }
 
   updateButtonState() {
-    const smallGoalCount = this.formsTarget.querySelectorAll(".small_goals").length;
+    const smallGoalCount = this.formsTarget.querySelectorAll(".small-goals").length;
     if (smallGoalCount >= 3) {
       this.buttonTarget.disabled = true;
     } else {

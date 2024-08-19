@@ -1,18 +1,30 @@
-.calendar_table {
-  -ms-writing-mode : tb-lr;
+@media (width >= 769px) {
+  .input {
+    width: 55%;
+  }
+
+  .small-goal-input {
+    width: 40%;
+  }
+}
+
+.calendar-table {
   writing-mode : vertical-lr;
   border-collapse: separate;
   border-spacing: 2px;
 }
-.calendar_line {
+
+.calendar-line {
   border-collapse: separate;
   border-spacing: 2px;
 }
-.table_text {
+
+.table-text {
   font-size: 0.8em;
   writing-mode:horizontal-tb;
 }
-.date_cell {
+
+.date-cell {
   width: 1.2em;
   height: 1.2em;
   border: 1px solid #bbb;
@@ -20,22 +32,84 @@
   background-color: #eee;
   position: relative;
 }
-.date_bubble {
+
+.date-bubble {
   font-size: 0.75em;
   writing-mode: horizontal-tb;
   position: absolute;
   display: none;
   padding: 5px;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255 255 255 / 100%);
   width: max-content;
   left: 0;
   transform: translateX(-100%);
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.table_cell:hover {
+
+.table-cell:hover {
   filter: brightness(1.2)
 }
-.table_cell:hover .date_bubble {
+
+.table-cell:hover .date-bubble {
   display: block;
+}
+
+.small-avatar {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.middle-avatar {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4%;
+}
+
+.logo {
+  height: 45px;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.align-items {
+  align-items: center;
+}
+
+.main-content {
+  min-height: 100vh;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.sidebar-content {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.date-table {
+  border-collapse: separate;
+  border-spacing: 15px 0;
+}
+
+.date-input {
+  width: 150px;
+}
+
+.small-goal-input {
+  width: 50%
 }

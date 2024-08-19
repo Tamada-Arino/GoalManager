@@ -1,72 +1,88 @@
 - content_for :js do
   = javascript_import_module_tag 'bulma_modal'
-h3 = @goal.title
-= link_to '目標一覧へ戻る', root_path
-table.calendar_table
+.is-flex.is-justify-content-space-between.mt-2
+  h3.is-size-4
+    = "#{@goal.title} "
+    span class="#{@goal.status[:class]}"
+      = @goal.status[:text]
+  .is-flex
+    = link_to '編集', edit_goal_path(@goal),
+      class: 'button is-info is-small'
+    = link_to '削除', goal_path(@goal), data: { turbo_method: :delete,
+      turbo_confirm: "#{@goal.title}を削除してもよろしいですか？" },
+      class: 'button is-danger has-text-white is-small mx-3'
+.mt-3
+  table.date-table
+    tr
+      th 開始日
+      td = @goal.start_date
+    - if @goal.schedules_end_date.present?
+      tr
+        th 終了予定日
+        td = @goal.schedules_end_date
+    - if @goal.end_date.present?
+      tr
+        th 達成日
+        td = @goal.end_date
+table.calendar-table.mt-3.mx-5
   tr
     - weekday.each do |wday|
-      td.table_text = wday
+      td.table-text = wday
   - @monthry_calendar.each do |week|
     tr
       - week.each do |date|
-        td style="#{ date[:style] }" class="#{ date[:class] } table_cell"
+        td style="#{ date[:style] }" class="#{ date[:class] } table-cell"
           - if date[:target_date].present?
-            p.date_bubble = date[:target_date]
-table.calendar_line
+            p.date-bubble = date[:target_date]
+table.calendar-line.mt-2.mx-5
   tr
-    td.table_text  less
+    td.table-text  less
     - @sample_calendar.each do |cell|
-      td style="#{ cell[:style] }" class="#{ cell[:class] } table_cell"
-    td.table_text  more
-table
-  tr
-    th ステータス
-    td = @goal.status
-  tr
-    th 開始日
-    td = @goal.start_date
-  - if @goal.schedules_end_date.present?
-    tr
-      th 終了予定日
-      td = @goal.schedules_end_date
-  - if @goal.end_date.present?
-    tr
-      th 達成日
-      td = @goal.end_date
-h4 小目標
-table
-  - @small_goals.each do |small_goal|
-    tr
-      th = small_goal.achievable ? 'DONE!!' : 'unfinished...'
-      td = small_goal.title
-
-= link_to '編集する', edit_goal_path(@goal), class: 'button'
-h3 日報一覧
-= link_to '日報作成', new_goal_report_path(@goal), class: 'button'
-ul
-  - @reports.each do |report|
-    li
-      button.js-modal-trigger data-target="report-modal-#{report.id}"
-        = report.target_date
-      .modal id="report-modal-#{report.id}"
-        .modal-background
-        .modal-content
-          .box
-            table
-              tr
-                th 実行日
-                td = report.target_date
+      td style="#{ cell[:style] }" class="#{ cell[:class] } table-cell"
+    td.table-text  more
+- if @small_goals.present?
+  h4.is-size-5.mt-3 小目標
+  table
+    - @small_goals.each do |small_goal|
+      tr
+        td
+          - if small_goal.achievable
+            span.tag.is-success.mr-2.mb-2 DONE!!
+          - else
+            span.tag.is-light.mr-2.mb-2 unfinished...
+        td = small_goal.title
+.mt-4
+  h3.is-size-5 日報一覧
+  = link_to new_goal_report_path(@goal),
+    class: 'button add-button is-success is-light p-5 is-size-5' do
+    i class='fa-regular fa-square-plus' 日報作成
+  ul
+    - @reports.each do |report|
+      li.ml-3
+        button.js-modal-trigger.mt-2 data-target="report-modal-#{report.id}"
+          = report.target_date
+        .modal id="report-modal-#{report.id}"
+          .modal-background
+          .modal-content
+            .box
+              p.my-2
+                span.mr-4 実行日
+                = report.target_date
               - if report.small_goal.present?
-                tr
-                  th 小目標
-                  td = report.small_goal.title
-              tr
-                th 達成度
-                td = report.progress_value
-              tr
-                td colspan=2
-                  = report.content.truncate(30)
-            = link_to '編集する', edit_goal_report_path(@goal.id, report),
-              class: 'button'
-        button.modal-close.is-large aria-label="close"
-= paginate @reports
+                p.my-2
+                  span.mr-4 小目標
+                  = report.small_goal.title
+              p.my-2
+                span.mr-4 達成度
+                = report.progress_value
+              p.my-2
+                = report.content
+              .mt-2.is-flex.is-justify-content-right
+                = link_to '編集', edit_goal_report_path(@goal.id, report),
+                  class: 'button is-info'
+                = link_to '削除', goal_report_path(@goal.id, report),
+                  data: { turbo_method: :delete,
+                  turbo_confirm: 'この日報を削除してもよろしいですか？' },
+                  class: 'button is-danger has-text-white ml-2'
+          button.modal-close.is-large aria-label="close"
+  = paginate @reports

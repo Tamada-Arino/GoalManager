@@ -7,11 +7,23 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    link [href="https://use.fontawesome.com/releases/v6.2.0/css/all.css"
+          rel="stylesheet"]
     = javascript_importmap_tags
     = yield(:js)
-  body
+  body.has-navbar-fixed-top
+    = render 'layouts/header'
     - if notice
-      p.notice = notice
+      .notification.is-success.is-light.has-text-centered.mb-0
+        p.notice
+          i class='fa-solid fa-circle-exclamation'
+          = notice
     - if alert
-      p.alert = alert
-    = yield
+      .notification.is-danger.is-light.has-text-centered.mb-0
+        p.alert
+          i.fa-solid.fa-circle-xmark
+          = alert
+    .columns
+      = render 'layouts/sidebar'
+      .column.main-content
+        = yield

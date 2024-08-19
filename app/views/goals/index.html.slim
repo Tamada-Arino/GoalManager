@@ -1,19 +1,15 @@
-.is-flex
-  - if current_user.avatar.attached?
-    = image_tag current_user.avatar.variant(:thumb)
-  p #{current_user.name}さん
-.is-flex
-  = link_to '登録情報編集', edit_user_registration_path, class: 'button'
-  = button_to 'ログアウト', destroy_user_session_path,
-    method: :delete, class: 'button'
-
-h3 目標一覧
-= link_to '目標の作成', new_goal_path, class: 'button'
+h3.is-size-4 目標一覧
+= link_to new_goal_path,
+  class: 'button add-button is-success is-light is-size-5 p-5' do
+  i.fa-regular.fa-square-plus 目標の作成
 ul
   - @goals.each_with_index do |goal, i|
     li.box = link_to goal_path(goal) do
-      p #{goal.title} - #{goal.status}
-      table.calendar_line
+      p
+        span class="#{goal.status[:class]}"
+          = goal.status[:text]
+        = " #{goal.title}"
+      table.calendar-line
         tr
           - @calendars[i].each do |date|
             td style="#{ date[:style] }" class="#{ date[:class] }"
