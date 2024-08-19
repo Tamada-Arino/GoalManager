@@ -3,28 +3,28 @@
     width: 55%;
   }
 
-  .small_goal_input {
+  .small-goal-input {
     width: 40%
   }
 }
 
-.calendar_table {
+.calendar-table {
   writing-mode : vertical-lr;
   border-collapse: separate;
   border-spacing: 2px;
 }
 
-.calendar_line {
+.calendar-line {
   border-collapse: separate;
   border-spacing: 2px;
 }
 
-.table_text {
+.table-text {
   font-size: 0.8em;
   writing-mode:horizontal-tb;
 }
 
-.date_cell {
+.date-cell {
   width: 1.2em;
   height: 1.2em;
   border: 1px solid #bbb;
@@ -33,7 +33,7 @@
   position: relative;
 }
 
-.date_bubble {
+.date-bubble {
   font-size: 0.75em;
   writing-mode: horizontal-tb;
   position: absolute;
@@ -47,22 +47,22 @@
   border-radius: 5px;
 }
 
-.table_cell:hover {
+.table-cell:hover {
   filter: brightness(1.2)
 }
 
-.table_cell:hover .date_bubble {
+.table-cell:hover .date-bubble {
   display: block;
 }
 
-.small_avatar {
+.small-avatar {
   width: 30px;
 	height: 30px;
 	object-fit: cover;
 	border-radius: 50%;
 }
 
-.middle_avatar {
+.middle-avatar {
   width: 80px;
 	height: 80px;
 	object-fit: cover;
@@ -79,37 +79,37 @@ header {
   height: 45px;
 }
 
-.add_button {
+.add-button {
   position: fixed;
   bottom: 30px;
   right: 30px;
 }
 
-.align_items {
+.align-items {
   align-items: center;
 }
 
-.main_content {
+.main-content {
   min-height: 100vh;
   max-width: 650px;
   margin: 0 auto;
 }
 
-.sidebar_content {
+.sidebar-content {
   width: fit-content;
   margin: 0 auto;
   padding: 20px 0;
 }
 
-.date_table {
+.date-table {
   border-collapse: separate;
   border-spacing: 15px 0;
 }
 
-.date_input {
+.date-input {
   width: 150px;
 }
 
-.small_goal_input {
+.small-goal-input {
   width: 50%
 }
