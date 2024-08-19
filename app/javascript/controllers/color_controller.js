@@ -10,6 +10,9 @@ export default class extends Controller {
 
   changeColorValue(event) {
     this.radioButtonTarget.value = event.target.value
+    if (this.radioButtonTarget.checked) {
+      this.changeSample(event);
+    }
   }
 
   initializeColor() {
