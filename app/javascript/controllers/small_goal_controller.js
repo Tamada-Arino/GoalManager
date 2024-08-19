@@ -14,10 +14,12 @@ export default class extends Controller {
       <div class="control small_goals mx-3 mb-3">
         <label>小目標</label>
         <br>
-        <input type="text" class="input is-small" name="goal[small_goals_attributes][${this.index}][title]">
-        <button type="button" class="button is-danger is-light is-small" data-action="click->small-goal#removeHtml">
-          削除
-        </button>
+        <div class="is-flex align_items">
+          <input type="text" class="input is-small" name="goal[small_goals_attributes][${this.index}][title]">
+          <button type="button" class="button is-danger is-light is-small" data-action="click->small-goal#removeHtml">
+            削除
+          </button>
+        </div>
       </div>
     `;
     this.formsTarget.insertAdjacentHTML('beforeend', html);

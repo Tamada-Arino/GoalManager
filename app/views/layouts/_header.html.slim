@@ -1,7 +1,7 @@
 header.navbar.is-fixed-top.has-background-grey-lighter
   h1 = link_to root_path do
     = image_tag 'logo.png', class: 'logo'
-  .is-flex.is-hidden-tablet.header_content
+  .is-flex.is-hidden-tablet.align_items
     - if user_signed_in?
       - if current_user.avatar.attached?
         = image_tag current_user.avatar.variant(:thumb),
