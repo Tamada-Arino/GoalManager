@@ -28,7 +28,7 @@
     = f.radio_button :color, f.object.color || default_color,
                       data: { color_target: 'radioButton' },
       checked: basic_colors.exclude?(f.object.color)
-    = f.label :custom_color, 'カスタム'
+    = f.label :custom_color, 'カスタム', class: 'mr-1'
     = f.color_field :custom_color,
                     value: f.object.color || default_color,
                     data: { action: 'input->color#changeColorValue' }
