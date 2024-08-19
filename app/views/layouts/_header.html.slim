@@ -8,9 +8,9 @@ header.navbar.is-fixed-top.has-background-grey-lighter
         - if user_signed_in?
           - if current_user.avatar.attached?
             = image_tag current_user.avatar.variant(:thumb),
-              class: 'small_avatar'
+              class: 'small-avatar'
           - else
-            = image_tag 'default_avatar.png', class: 'small_avatar'
+            = image_tag 'default_avatar.png', class: 'small-avatar'
           p #{current_user.name}
           i.fas.fa-angle-down
         - else
