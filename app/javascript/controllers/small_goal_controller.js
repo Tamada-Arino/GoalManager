@@ -15,7 +15,7 @@ export default class extends Controller {
         <label>小目標</label>
         <br>
         <div class="is-flex align_items">
-          <input type="text" class="input is-small" name="goal[small_goals_attributes][${this.index}][title]">
+          <input type="text" class="input is-small small_goal_input" name="goal[small_goals_attributes][${this.index}][title]">
           <button type="button" class="button is-danger is-light is-small" data-action="click->small-goal#removeHtml">
             削除
           </button>

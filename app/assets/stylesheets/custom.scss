@@ -77,11 +77,21 @@ header {
   margin: 0 auto;
   padding: 20px 0;
 }
-@media (min-width: 769px) {
-  .input {
-    width: 60%;
-  }
-}
 .date_input {
   width: 150px;
+}
+.small_goal_input {
+  width: 60%
+}
+.small_goal_input {
+  width: 60%
+}
+
+@media (min-width: 769px) {
+  .input {
+    width: 55%;
+  }
+  .small_goal_input {
+    width: 40%
+  }
 }
