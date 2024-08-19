@@ -14,7 +14,6 @@ export default class extends Controller {
 
   initializeColor() {
     const baseColor = this.customColorTarget.value
-    console.log(baseColor);
     if (baseColor) {
       this.changeSample({ target: { value: baseColor } })
     }
