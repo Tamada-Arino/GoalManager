@@ -34,7 +34,7 @@ export default class extends Controller {
     }
 
     this.applyStyles(cells.bad, baseColor, 0.3)
-    this.applyStyles(cells.soso, baseColor, 0.3)
+    this.applyStyles(cells.soso, baseColor, 0.6)
     this.applyStyles(cells.nomal, baseColor)
     this.applyStyles(cells.good, this.darkenColorValue(baseColor))
   }
