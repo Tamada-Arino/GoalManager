@@ -11,7 +11,7 @@ header.navbar.is-fixed-top.has-background-grey-lighter
               class: 'small-avatar'
           - else
             = image_tag 'default_avatar.png', class: 'small-avatar'
-          p #{current_user.name}
+          p.mx-1 #{current_user.name.truncate(15)}
           i.fas.fa-angle-down
         - else
           p メニュー

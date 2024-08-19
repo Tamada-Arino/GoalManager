@@ -6,7 +6,7 @@
           class: 'middle-avatar'
       - else
         = image_tag 'default_avatar.png', class: 'middle-avatar'
-      p.is-size-4 #{current_user.name}さん
+      p.is-size-4 #{current_user.name.truncate(20)}
       = link_to '目標一覧', root_path, class: 'is-block'
       = link_to '登録情報', edit_user_registration_path,
         class: 'is-block'
