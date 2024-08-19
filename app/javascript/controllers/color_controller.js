@@ -12,7 +12,7 @@ export default class extends Controller {
     this.customRadioTarget.value = event.target.value
 
     if (this.customRadioTarget.checked) {
-      this.changeSample(event);
+      this.changeSample(event)
     }
   }
 
