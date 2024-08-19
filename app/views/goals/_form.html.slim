@@ -8,11 +8,11 @@
     br
     = f.date_field :start_date,
       value: f.object.start_date || Time.zone.today,
-      class: 'input date_input'
+      class: 'input date-input'
   .control.m-3
     = f.label :schedules_end_date
     br
-    = f.date_field :schedules_end_date, class: 'input date_input'
+    = f.date_field :schedules_end_date, class: 'input date-input'
   .control.m-3
     = f.label :color
     br
@@ -41,7 +41,7 @@
     .control.m-3
       = f.label :end_date
       br
-      = f.date_field :end_date, class: 'input date_input'
+      = f.date_field :end_date, class: 'input date-input'
   .control.m-3
     button.button [type='button'
       data-action='click->small-goal#insertHtml'
@@ -49,13 +49,13 @@
       | 小目標を追加
   div data-small-goal-target='forms'
     - goal.small_goals.each_with_index do |small_goal, i|
-      .control.small_goals.mx-3.mb-3
+      .control.small-goals.mx-3.mb-3
         label 小目標
         br
         = f.text_field :small_goals_attributes,
           name: "goal[small_goals_attributes][sg_#{i}][title]",
           value: small_goal.title,
-          class: 'mr-3 input is-small small_goal_input'
+          class: 'mr-3 input is-small small-goal-input'
         - if goal.persisted?
           = f.check_box :small_goals_attributes,
             name: "goal[small_goals_attributes][sg_#{i}][achievable]",

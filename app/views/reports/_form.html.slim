@@ -5,7 +5,7 @@
       br
       = f.date_field :target_date,
         value: f.object.target_date || Time.zone.today,
-        class: 'input date_input'
+        class: 'input date-input'
     - if small_goals.present?
       .control.m-3
         = f.label :small_goal_id

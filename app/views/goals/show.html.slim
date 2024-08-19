@@ -12,7 +12,7 @@
       turbo_confirm: "#{@goal.title}を削除してもよろしいですか？" },
       class: 'button is-danger has-text-white is-small mx-3'
 .mt-3
-  table.date_table
+  table.date-table
     tr
       th 開始日
       td = @goal.start_date
@@ -24,22 +24,22 @@
       tr
         th 達成日
         td = @goal.end_date
-table.calendar_table.mt-3.mx-5
+table.calendar-table.mt-3.mx-5
   tr
     - weekday.each do |wday|
-      td.table_text = wday
+      td.table-text = wday
   - @monthry_calendar.each do |week|
     tr
       - week.each do |date|
-        td style="#{ date[:style] }" class="#{ date[:class] } table_cell"
+        td style="#{ date[:style] }" class="#{ date[:class] } table-cell"
           - if date[:target_date].present?
-            p.date_bubble = date[:target_date]
-table.calendar_line.mt-2.mx-5
+            p.date-bubble = date[:target_date]
+table.calendar-line.mt-2.mx-5
   tr
-    td.table_text  less
+    td.table-text  less
     - @sample_calendar.each do |cell|
-      td style="#{ cell[:style] }" class="#{ cell[:class] } table_cell"
-    td.table_text  more
+      td style="#{ cell[:style] }" class="#{ cell[:class] } table-cell"
+    td.table-text  more
 - if @small_goals.present?
   h4.is-size-5.mt-3 小目標
   table
@@ -54,7 +54,7 @@ table.calendar_line.mt-2.mx-5
 .mt-4
   h3.is-size-5 日報一覧
   = link_to new_goal_report_path(@goal),
-    class: 'button add_button is-success is-light p-5 is-size-5' do
+    class: 'button add-button is-success is-light p-5 is-size-5' do
     i class='fa-regular fa-square-plus' 日報作成
   ul
     - @reports.each do |report|
