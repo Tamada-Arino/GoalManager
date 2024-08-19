@@ -26,17 +26,21 @@ export default class extends Controller {
   changeSample(event) {
     const baseColor = event.target.value
 
-    const cells = {
-      bad: document.querySelector("#sample_1"),
-      soso: document.querySelector("#sample_2"),
-      nomal: document.querySelector("#sample_3"),
-      good: document.querySelector("#sample_4")
-    }
+    const cells = this.sampleCells();
 
     this.applyStyles(cells.bad, baseColor, 0.3)
     this.applyStyles(cells.soso, baseColor, 0.6)
     this.applyStyles(cells.nomal, baseColor)
     this.applyStyles(cells.good, this.darkenColorValue(baseColor))
+  }
+
+  sampleCells() {
+    return {
+      bad: document.querySelector("#sample_1"),
+      soso: document.querySelector("#sample_2"),
+      nomal: document.querySelector("#sample_3"),
+      good: document.querySelector("#sample_4")
+    }
   }
 
   applyStyles(cell, color, opacity = 1) {
