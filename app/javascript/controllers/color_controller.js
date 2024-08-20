@@ -5,9 +5,6 @@ import { CellStyles } from "./cell_styles"
 export default class extends Controller {
   static targets = ["customRadio", "customColor"]
 
-  applyStyles = CellStyles.applyStyles
-  darkenColorValue = CellStyles.darkenColorValue
-
   connect() {
     this.initializeColor()
   }
@@ -32,10 +29,10 @@ export default class extends Controller {
 
     const cells = this.sampleCells();
 
-    this.applyStyles(cells.bad, baseColor, 0.3)
-    this.applyStyles(cells.soso, baseColor, 0.6)
-    this.applyStyles(cells.nomal, baseColor)
-    this.applyStyles(cells.good, this.darkenColorValue(baseColor))
+    CellStyles.applyStyles(cells.bad, baseColor, 0.3)
+    CellStyles.applyStyles(cells.soso, baseColor, 0.6)
+    CellStyles.applyStyles(cells.nomal, baseColor)
+    CellStyles.applyStyles(cells.good,  CellStyles.darkenColorValue(baseColor))
   }
 
   sampleCells() {

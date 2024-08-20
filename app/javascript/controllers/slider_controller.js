@@ -4,9 +4,6 @@ import { CellStyles } from "./cell_styles"
 export default class extends Controller {
   static targets = ["value", "colorSample"]
 
-  applyStyles = CellStyles.applyStyles
-  darkenColorValue = CellStyles.darkenColorValue
-
   connect() {
     this.changeSample(this.valueTarget.textContent)
   }
@@ -20,10 +17,10 @@ export default class extends Controller {
   changeSample(progressValue) {
     const statusNumber = this.buildStatusNumber(progressValue)
     const defaultColor = this.element.dataset.goalColor
-    const color = statusNumber === 4 ? this.darkenColorValue(defaultColor) : defaultColor
+    const color = statusNumber === 4 ? CellStyles.darkenColorValue(defaultColor) : defaultColor
     const opacity = this.buildOpacity(statusNumber)
 
-    this.applyStyles(this.colorSampleTarget, color, opacity)
+    CellStyles.applyStyles(this.colorSampleTarget, color, opacity)
   }
 
   buildStatusNumber(progressValue) {
