@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["forms", "button"]
 
   connect() {
-    this.index = 0;
+    this.index = this.formsTarget.querySelectorAll(".small-goals").length;
     this.updateButtonState();
   }
 
