@@ -5,6 +5,8 @@
     = f.date_field :target_date,
       value: f.object.target_date || Time.zone.today,
       class: 'input date-input'
+    - if report.errors.include?(:target_date)
+      p.has-text-danger = report.errors.full_messages_for(:target_date).first
   - if small_goals.present?
     .control.m-3
       = f.label :small_goal_id
@@ -13,6 +15,9 @@
         = f.select :small_goal_id,
           options_for_select(small_goals, f.object.small_goal_id),
           include_blank: '紐づける小目標を選択'
+      - if report.errors.include?(:small_goal_id)
+        p.has-text-danger
+          = report.errors.full_messages_for(:small_goal_id).first
   .control.m-3
     = f.label :progress_value
     br
@@ -24,9 +29,13 @@
       tr
         td.table-text カラーサンプル：
         td.date-cell data-slider-target='colorSample'
+    - if report.errors.include?(:progress_value)
+      p.has-text-danger = report.errors.full_messages_for(:progress_value).first
   .control.m-3
     = f.label :content
     br
     = f.text_area :content, class: 'textarea'
+    - if report.errors.include?(:content)
+      p.has-text-danger = report.errors.full_messages_for(:content).first
   .control.m-3
     = f.submit nil, class: 'button is-success'
