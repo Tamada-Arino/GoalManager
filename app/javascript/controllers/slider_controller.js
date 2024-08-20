@@ -43,6 +43,8 @@ export default class extends Controller {
         return 0.3
       case 2:
         return 0.6
+      default:
+        return 1
     }
   }
 }
