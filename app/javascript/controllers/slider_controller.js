@@ -17,16 +17,7 @@ export default class extends Controller {
     const statusNumber = this.buildStatusNumber(progressValue)
     const defaultColor = this.element.dataset.goalColor
     const color = statusNumber === 4 ? this.darkenColorValue(defaultColor) : defaultColor
-    let opacity
-
-    switch (statusNumber) {
-      case 1:
-        opacity = 0.3
-        break
-      case 2:
-        opacity = 0.6
-        break
-    }
+    const opacity = this.buildOpacity(statusNumber)
 
     this.applyStyles(this.colorSampleTarget, color, opacity)
   }
@@ -39,6 +30,15 @@ export default class extends Controller {
       return Math.floor((progressValue - offsetNumber) / thresholdValue) + offsetNumber
     } else {
       return 1
+    }
+  }
+
+  buildOpacity(statusNumber) {
+    switch (statusNumber) {
+      case 1:
+        return 0.3
+      case 2:
+        return 0.6
     }
   }
 
