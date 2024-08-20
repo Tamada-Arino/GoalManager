@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import { CellStyles } from "./cell_styles"
 
 // Connects to data-controller="color"
 export default class extends Controller {
@@ -28,10 +29,10 @@ export default class extends Controller {
 
     const cells = this.sampleCells();
 
-    this.applyStyles(cells.bad, baseColor, 0.3)
-    this.applyStyles(cells.soso, baseColor, 0.6)
-    this.applyStyles(cells.nomal, baseColor)
-    this.applyStyles(cells.good, this.darkenColorValue(baseColor))
+    CellStyles.applyStyles(cells.bad, baseColor, 0.3)
+    CellStyles.applyStyles(cells.soso, baseColor, 0.6)
+    CellStyles.applyStyles(cells.nomal, baseColor)
+    CellStyles.applyStyles(cells.good,  CellStyles.darkenColorValue(baseColor))
   }
 
   sampleCells() {
@@ -41,24 +42,5 @@ export default class extends Controller {
       nomal: document.querySelector("#sample_3"),
       good: document.querySelector("#sample_4")
     }
-  }
-
-  applyStyles(cell, color, opacity = 1) {
-    cell.style.backgroundColor = color
-    cell.style.opacity = opacity
-  }
-
-  darkenColorValue(hex) {
-    const darkenValue = 65
-
-    const rgb = [
-      parseInt(hex.slice(1, 3), 16),
-      parseInt(hex.slice(3, 5), 16),
-      parseInt(hex.slice(5, 7), 16)
-    ]
-
-    const darkenedRgb = rgb.map(value => Math.max(0, value - darkenValue))
-
-    return `rgb(${darkenedRgb.join(", ")})`
   }
 }

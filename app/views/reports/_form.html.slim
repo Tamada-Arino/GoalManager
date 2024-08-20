@@ -1,29 +1,32 @@
 = form_with model: models, local: true do |f|
-  div data-controller='slider'
+  .control.m-3
+    = f.label :target_date
+    br
+    = f.date_field :target_date,
+      value: f.object.target_date || Time.zone.today,
+      class: 'input date-input'
+  - if small_goals.present?
     .control.m-3
-      = f.label :target_date
+      = f.label :small_goal_id
       br
-      = f.date_field :target_date,
-        value: f.object.target_date || Time.zone.today,
-        class: 'input date-input'
-    - if small_goals.present?
-      .control.m-3
-        = f.label :small_goal_id
-        br
-        .select
-          = f.select :small_goal_id,
-            options_for_select(small_goals, f.object.small_goal_id),
-            include_blank: '紐づける小目標を選択'
-    .control.m-3
-      = f.label :progress_value
-      br
-      - progress_value = f.object.progress_value || 50
-      = f.range_field :progress_value, in: 0..100, value: progress_value,
-                      data: { action: 'input->slider#changeValue' }
-      span data-slider-target='value' = progress_value
-    .control.m-3
-      = f.label :content
-      br
-      = f.text_area :content, class: 'textarea'
-    .control.m-3
-      = f.submit nil, class: 'button is-success'
+      .select
+        = f.select :small_goal_id,
+          options_for_select(small_goals, f.object.small_goal_id),
+          include_blank: '紐づける小目標を選択'
+  .control.m-3
+    = f.label :progress_value
+    br
+    - progress_value = f.object.progress_value || 50
+    = f.range_field :progress_value, in: 0..100, value: progress_value,
+                    data: { action: 'input->slider#changeValue' }
+    span data-slider-target='value' = progress_value
+    table.calendar-line
+      tr
+        td.table-text カラーサンプル：
+        td.date-cell data-slider-target='colorSample'
+  .control.m-3
+    = f.label :content
+    br
+    = f.text_area :content, class: 'textarea'
+  .control.m-3
+    = f.submit nil, class: 'button is-success'
