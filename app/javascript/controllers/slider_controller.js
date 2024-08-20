@@ -34,8 +34,11 @@ export default class extends Controller {
   }
 
   buildStatusNumber(progressValue) {
+    const offsetNumber = 1
+    const thresholdValue = 25
+
     if (progressValue > 0) {
-      return Math.floor((progressValue - 1) / 25) + 1
+      return Math.floor((progressValue - offsetNumber) / thresholdValue) + offsetNumber
     } else {
       return 1
     }
