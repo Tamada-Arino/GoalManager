@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ["value", "colorSample"]
 
   connect() {
-    this.changeSample(this.valueTarget.value)
+    this.changeSample(this.valueTarget.textContent)
   }
 
   changeValue(event) {
