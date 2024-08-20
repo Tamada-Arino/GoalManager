@@ -39,11 +39,6 @@ h2.is-size-4
         | )
       br
       = f.password_field :password, autocomplete: 'new-password', class: 'input'
-      / - if @minimum_password_length
-      /   br
-      /   em
-      /     = t('devise.shared.minimum_password_length',
-      /       count: @minimum_password_length)
       - if resource.errors.include?(:password)
         p.has-text-danger = resource.errors.full_messages_for(:password).first
     .control.mb-3
