@@ -3,32 +3,38 @@ h2.is-size-4
 .mx-3.mt-3
   = form_for(resource, as: resource_name,
     url: registration_path(resource_name)) do |f|
-    = render 'devise/shared/error_messages', resource:
     .control.mb-3
       = f.label :name
       br
       = f.text_field :name, autofocus: true, class: 'input'
+      - if resource.errors.include?(:name)
+        p.has-text-danger = resource.errors.full_messages_for(:name).first
     .control.mb-3
       = f.label :email
       br
       = f.email_field :email, autocomplete: 'email', class: 'input'
+      - if resource.errors.include?(:email)
+        p.has-text-danger = resource.errors.full_messages_for(:email).first
     .control.mb-3
       = f.label :avatar
       br
       = f.file_field :avatar
+      - if resource.errors.include?(:avatar)
+        p.has-text-danger = resource.errors.full_messages_for(:avatar).first
     .control.mb-3
       = f.label :password
-      - if @minimum_password_length
-        em
-          = t('devise.shared.minimum_password_length',
-            count: @minimum_password_length)
       br
       = f.password_field :password, autocomplete: 'new-password', class: 'input'
+      - if resource.errors.include?(:password)
+        p.has-text-danger = resource.errors.full_messages_for(:password).first
     .control.mb-3
       = f.label :password_confirmation
       br
       = f.password_field :password_confirmation,
         autocomplete: 'new-password', class: 'input'
+      - if resource.errors.include?(:password_confirmation)
+        p.has-text-danger
+          = resource.errors.full_messages_for(:password_confirmation).first
     .control.mb-3
       = f.submit t('.sign_up'), class: 'button is-success'
   = render 'devise/shared/links'
