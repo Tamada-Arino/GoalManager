@@ -86,9 +86,9 @@ class GoalsController < ApplicationController
   end
 
   def destroy_small_goals
-    entered_small_goals = small_goals_attributes&.reject { |_, v| v[:id].blank? } || []
+    entered_small_goal_ids = small_goals_attributes&.values&.map { |v| v[:id]&.to_i }.compact || []
 
-    @goal.small_goals.where.not(id: entered_small_goals).destroy_all
+    @goal.small_goals.where.not(id: entered_small_goal_ids).destroy_all
   end
 
   def update_or_create_small_goals
