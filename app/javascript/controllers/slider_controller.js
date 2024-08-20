@@ -4,8 +4,8 @@ import { CellStyles } from "./cell_styles"
 export default class extends Controller {
   static targets = ["value", "colorSample"]
 
-  applyStyles = CellStyles.applyStyles.bind(this)
-  darkenColorValue = CellStyles.darkenColorValue.bind(this)
+  applyStyles = CellStyles.applyStyles
+  darkenColorValue = CellStyles.darkenColorValue
 
   connect() {
     this.changeSample(this.valueTarget.textContent)
