@@ -3,16 +3,23 @@
     = f.label :title
     br
     = f.text_field :title, class: 'input'
+    - if goal.errors.include?(:title)
+      p.has-text-danger = goal.errors.full_messages_for(:title).first
   .control.m-3
     = f.label :start_date
     br
     = f.date_field :start_date,
       value: f.object.start_date || Time.zone.today,
       class: 'input date-input'
+    - if goal.errors.include?(:start_date)
+      p.has-text-danger = goal.errors.full_messages_for(:start_date).first
   .control.m-3
     = f.label :schedules_end_date
     br
     = f.date_field :schedules_end_date, class: 'input date-input'
+    - if goal.errors.include?(:schedules_end_date)
+      p.has-text-danger
+        = goal.errors.full_messages_for(:schedules_end_date).first
   .control.m-3
     = f.label :color
     br
@@ -52,6 +59,8 @@
       = f.label :end_date
       br
       = f.date_field :end_date, class: 'input date-input'
+      - if goal.errors.include?(:end_date)
+        p.has-text-danger = goal.errors.full_messages_for(:end_date).first
   .control.m-3
     button.button [type='button'
       data-action='click->small-goal#insertHtml'
