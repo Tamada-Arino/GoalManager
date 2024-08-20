@@ -28,8 +28,6 @@ export default class extends Controller {
       case 4:
         color = this.darkenColorValue(color)
         break
-      default:
-        opacity = 1
     }
 
     this.applyStyles(this.colorSampleTarget, color, opacity)
