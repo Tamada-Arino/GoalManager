@@ -19,19 +19,29 @@
     - default_color = goal.color || '#ff0000'
     - basic_colors = %w[#ff0000 #00ff00 #0000ff]
     = f.radio_button :color, '#ff0000',
-      checked: default_color == '#ff0000'
+      checked: default_color == '#ff0000',
+      data: { action: 'click->color#changeSample' }
     = f.label :color_red, '赤', class: 'mr-3'
-    = f.radio_button :color, '#00ff00', checked: default_color == '#00ff00'
+    = f.radio_button :color, '#00ff00', checked: default_color == '#00ff00',
+      data: { action: 'click->color#changeSample' }
     = f.label :color_green, '緑', class: 'mr-3'
-    = f.radio_button :color, '#0000ff', checked: default_color == '#0000ff'
+    = f.radio_button :color, '#0000ff', checked: default_color == '#0000ff',
+      data: { action: 'click->color#changeSample' }
     = f.label :color_blue, '青', class: 'mr-3'
     = f.radio_button :color, f.object.color || default_color,
-                      data: { color_target: 'radioButton' },
+                      data: { color_target: 'customRadio',
+                      action: 'click->color#changeSample' },
       checked: basic_colors.exclude?(f.object.color)
     = f.label :custom_color, 'カスタム', class: 'mr-1'
     = f.color_field :custom_color,
                     value: f.object.color || default_color,
-                    data: { action: 'input->color#changeColorValue' }
+                    data: { color_target: 'customColor',
+                    action: 'input->color#changeColorValue' }
+    table.calendar-line.mt-1
+      tr
+        td.table-text カラーサンプル:
+        - (0..4).each do |status|
+          td.date-cell id="sample_#{status}"
   - if goal.persisted?
     .control.m-3
       = f.label :interrupted
