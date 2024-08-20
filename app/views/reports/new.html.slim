@@ -1,5 +1,4 @@
 h3.is-size-4 日報作成
-= render 'shared/errors', obj: @report
 - small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
 div data-controller='slider' data-goal-color="#{@goal.color}"
-  = render 'form', models: [@goal, @report], goal: @goal, small_goals:
+  = render 'form', models: [@goal, @report], report: @report, small_goals:

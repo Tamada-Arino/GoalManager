@@ -1,7 +1,4 @@
 h3.is-size-4 目標新規作成
 = link_to '戻る', :back
-= render 'shared/errors', obj: @goal
-- @goal.small_goals.each do |small_goal|
-  = render 'shared/errors', obj: small_goal
 div data-controller='small-goal color'
   = render 'form', goal: @goal
