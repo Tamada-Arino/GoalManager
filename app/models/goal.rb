@@ -5,7 +5,7 @@ class Goal < ApplicationRecord
   validates :start_date, presence: true
   validates :color, presence: true,
                     format: { with: /\A#(?:[0-9a-fA-F]{3}){1,2}\z/, message: :invalid_color }
-  validate :start_date_check
+  validate :start_date_check, if: :start_date
   validate :small_goals_achievable_check
   after_validation :remove_small_goal_errors
 
@@ -29,7 +29,7 @@ class Goal < ApplicationRecord
 
   def start_date_check
     %i[schedules_end_date end_date].each do |target_date|
-      next unless send(target_date).present? && start_date.present? && start_date > send(target_date)
+      next unless send(target_date).present? && start_date > send(target_date)
 
       errors.add(target_date, :start_date_invalid)
     end
