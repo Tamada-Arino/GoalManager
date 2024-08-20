@@ -82,7 +82,9 @@ class GoalsController < ApplicationController
   end
 
   def small_goals_attributes
-    @small_goals_attributes ||= params.dig(:goal, :small_goals_attributes)
+    @small_goals_attributes ||= params.require(:goal)
+                                      .permit(small_goals_attributes: %i[id title achievable])
+                                      .to_h[:small_goals_attributes]
   end
 
   def destroy_small_goals
