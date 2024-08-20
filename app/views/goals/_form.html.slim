@@ -3,23 +3,19 @@
     = f.label :title
     br
     = f.text_field :title, class: 'input'
-    - if goal.errors.include?(:title)
-      p.has-text-danger = goal.errors.full_messages_for(:title).first
+    = render 'shared/error_message', obj: goal, column: :title
   .control.m-3
     = f.label :start_date
     br
     = f.date_field :start_date,
       value: f.object.start_date || Time.zone.today,
       class: 'input date-input'
-    - if goal.errors.include?(:start_date)
-      p.has-text-danger = goal.errors.full_messages_for(:start_date).first
+    = render 'shared/error_message', obj: goal, column: :start_date
   .control.m-3
     = f.label :schedules_end_date
     br
     = f.date_field :schedules_end_date, class: 'input date-input'
-    - if goal.errors.include?(:schedules_end_date)
-      p.has-text-danger
-        = goal.errors.full_messages_for(:schedules_end_date).first
+    = render 'shared/error_message', obj: goal, column: :schedules_end_date
   .control.m-3
     = f.label :color
     br
@@ -49,6 +45,7 @@
         td.table-text カラーサンプル:
         - (0..4).each do |status|
           td.date-cell id="sample_#{status}"
+    = render 'shared/error_message', obj: goal, column: :color
   - if goal.persisted?
     .control.m-3
       = f.label :interrupted
@@ -59,8 +56,7 @@
       = f.label :end_date
       br
       = f.date_field :end_date, class: 'input date-input'
-      - if goal.errors.include?(:end_date)
-        p.has-text-danger = goal.errors.full_messages_for(:end_date).first
+      = render 'shared/error_message', obj: goal, column: :end_date
   .control.m-3
     button.button [type='button'
       data-action='click->small-goal#insertHtml'
