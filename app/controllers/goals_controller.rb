@@ -88,7 +88,7 @@ class GoalsController < ApplicationController
   end
 
   def destroy_small_goals
-    entered_small_goal_ids = small_goals_attributes&.filter_map{ |_, v| v[:id]&.to_i } || []
+    entered_small_goal_ids = small_goals_attributes&.filter_map { |_, v| v[:id]&.to_i } || []
 
     @goal.small_goals.where.not(id: entered_small_goal_ids).destroy_all
   end
