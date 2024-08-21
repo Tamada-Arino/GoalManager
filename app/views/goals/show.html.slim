@@ -1,7 +1,7 @@
 - content_for :js do
   = javascript_import_module_tag 'bulma_modal'
-.is-flex.is-justify-content-space-between.mt-2
-  h3.is-size-4.my-4
+.is-flex.is-justify-content-space-between.my-4
+  h3.is-size-4
     = "#{@goal.title} "
     span class="#{@goal.status[:class]}"
       = @goal.status[:text]
