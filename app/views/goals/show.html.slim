@@ -1,6 +1,6 @@
 - content_for :js do
   = javascript_import_module_tag 'bulma_modal'
-.is-flex.is-justify-content-space-between.mt-2
+.is-flex.is-justify-content-space-between.my-4
   h3.is-size-4
     = "#{@goal.title} "
     span class="#{@goal.status[:class]}"
@@ -60,7 +60,7 @@ table.calendar-line.mt-2.mx-5
     - @reports.each do |report|
       li.ml-3
         button.js-modal-trigger.mt-2 data-target="report-modal-#{report.id}"
-          = report.target_date
+          = "#{report.target_date} #{report.content.truncate(20)}"
         .modal id="report-modal-#{report.id}"
           .modal-background
           .modal-content

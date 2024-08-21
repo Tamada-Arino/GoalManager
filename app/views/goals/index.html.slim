@@ -1,4 +1,4 @@
-h3.is-size-4 目標一覧
+h3.custom-title 目標一覧
 = link_to new_goal_path,
   class: 'button add-button is-success is-light is-size-5 p-5' do
   i.fa-regular.fa-square-plus 目標の作成
@@ -6,10 +6,10 @@ ul
   - @goals.each_with_index do |goal, i|
     li.box = link_to goal_path(goal) do
       p
-        span class="#{goal.status[:class]}"
+        span class="#{goal.status[:class]} mr-3"
           = goal.status[:text]
         = " #{goal.title}"
-      table.calendar-line
+      table.calendar-line.mt-2
         tr
           - @calendars[i].each do |date|
             td style="#{ date[:style] }" class="#{ date[:class] }"
