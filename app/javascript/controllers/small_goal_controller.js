@@ -3,9 +3,10 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="small-goal"
 export default class extends Controller {
   static targets = ["forms", "button"]
+  static values = { count: Number }
 
   connect() {
-    this.index = 0;
+    this.index = this.countValue
     this.updateButtonState();
   }
 

@@ -82,13 +82,15 @@ class GoalsController < ApplicationController
   end
 
   def small_goals_attributes
-    @small_goals_attributes ||= params.dig(:goal, :small_goals_attributes)
+    @small_goals_attributes ||= params.require(:goal)
+                                      .permit(small_goals_attributes: %i[id title achievable])
+                                      .to_h[:small_goals_attributes]
   end
 
   def destroy_small_goals
-    entered_small_goals = small_goals_attributes&.reject { |_, v| v[:id].blank? } || []
+    entered_small_goal_ids = small_goals_attributes&.filter_map { |_, v| v[:id]&.to_i } || []
 
-    @goal.small_goals.where.not(id: entered_small_goals).destroy_all
+    @goal.small_goals.where.not(id: entered_small_goal_ids).destroy_all
   end
 
   def update_or_create_small_goals
