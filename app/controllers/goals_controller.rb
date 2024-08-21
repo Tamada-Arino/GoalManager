@@ -7,7 +7,7 @@ class GoalsController < ApplicationController
   CALENDAR_MONTHS = 2
 
   def index
-    @goals = current_user.goals.includes(:reports).order(:created_at).page(params[:page]).per(PAGINATE_PER)
+    @goals = current_user.goals.includes(:reports).order(updated_at: 'DESC').page(params[:page]).per(PAGINATE_PER)
 
     @calendars = @goals.map do |goal|
       Calendar.new(goal, CALENDAR_LINE_DAYS.days).generate_line
