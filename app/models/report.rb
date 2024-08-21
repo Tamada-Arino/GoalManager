@@ -5,7 +5,7 @@ class Report < ApplicationRecord
   validates :progress_value, presence: true, numericality: { in: 0..100 }
   validate :progress_date_check
 
-  belongs_to :goal
+  belongs_to :goal, touch: true
   belongs_to :small_goal, optional: true
 
   private
