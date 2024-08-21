@@ -1,5 +1,5 @@
 h3.is-size-4 目標新規作成
 = link_to '戻る', :back
 div [data-controller='small-goal color'
-     data-small-goal-count="#{@goal.small_goals.count}"]
+     data-small-goal-count-value="#{@goal.small_goals.count}"]
   = render 'form', goal: @goal
