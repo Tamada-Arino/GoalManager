@@ -1,5 +1,7 @@
 h3.custom-title 目標編集
-= link_to '戻る', :back
+= link_to goal_path(@goal) do
+  i class="fa-solid fa-arrow-left"
+  | 戻る
 div [data-controller='small-goal color'
      data-small-goal-count-value="#{@goal.small_goals.count}"]
   = render 'form', goal: @goal
