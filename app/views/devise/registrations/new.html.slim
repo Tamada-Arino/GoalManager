@@ -28,7 +28,8 @@ h2.custom-title
       br
       = f.password_field :password_confirmation,
         autocomplete: 'new-password', class: 'input'
-      = render 'shared/error_message', obj: resource, column: :password_confirmation
+      = render 'shared/error_message',
+        obj: resource, column: :password_confirmation
     .control.mb-3
       = f.submit t('.sign_up'), class: 'button is-success'
   = render 'devise/shared/links'

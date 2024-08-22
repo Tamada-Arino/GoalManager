@@ -1,4 +1,7 @@
 h3.custom-title 日報作成
+= link_to goal_path(@goal) do
+  i class="fa-solid fa-arrow-left"
+  | 戻る
 - small_goals = @goal.small_goals.order(:created_at).pluck(:title, :id)
 div data-controller='slider' data-goal-color="#{@goal.color}"
   = render 'form', models: [@goal, @report], report: @report, small_goals:

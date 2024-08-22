@@ -11,6 +11,9 @@
     = link_to '削除', goal_path(@goal), data: { turbo_method: :delete,
       turbo_confirm: "#{@goal.title}を削除してもよろしいですか？" },
       class: 'button is-danger has-text-white is-small mx-3'
+= link_to :back do
+  i class="fa-solid fa-arrow-left"
+  | 戻る
 .mt-3
   table.date-table
     tr
