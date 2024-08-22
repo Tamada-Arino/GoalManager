@@ -116,6 +116,6 @@ header {
 }
 
 .custom-title {
-  @extend .is-size-4;
-  @extend .my-4;
+  @extend %is-size-4 !optional;
+  @extend %my-4 !optional;
 }
