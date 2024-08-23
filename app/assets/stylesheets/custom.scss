@@ -112,10 +112,5 @@ header {
 }
 
 .small-goal-input {
-  width: 50%
-}
-
-.custom-title {
-  @extend %is-size-4 !optional;
-  @extend %my-4 !optional;
+  width: 50%;
 }
