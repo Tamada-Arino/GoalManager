@@ -17,6 +17,11 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
     end
 
+    it 'メールアドレスが通常の文字列の時登録できないこと' do
+      user = build(:user, email: 'text')
+      expect(user).not_to be_valid
+    end
+
     it 'パスワードが空白の時登録できないこと' do
       user = build(:user, password: '')
       expect(user).not_to be_valid
@@ -31,5 +36,9 @@ RSpec.describe User, type: :model do
       user = build(:user, password_confirmation: 'another_password')
       expect(user).not_to be_valid
     end
+
+    it 'パスワード6文字未満の時登録できないこと' do
+      user = build(:user, password: 'a' * 5, password_confirmation: 'a' * 5)
+      expect(user).not_to be_valid
   end
 end
