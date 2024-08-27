@@ -40,5 +40,6 @@ RSpec.describe User, type: :model do
     it 'パスワード6文字未満の時登録できないこと' do
       user = build(:user, password: 'a' * 5, password_confirmation: 'a' * 5)
       expect(user).not_to be_valid
+    end
   end
 end
