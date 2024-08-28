@@ -81,6 +81,18 @@ RSpec.describe Goal, type: :model do
         goal.end_date = Time.zone.today
         expect(goal).not_to be_valid
       end
+
+      it '3つまで登録できること' do
+        goal = build(:goal, end_date: '')
+        create_list(:small_goal, 3, goal:)
+        expect(goal).to be_valid
+      end
+
+      it '4つ以上は登録できないこと' do
+        goal = build(:goal, end_date: '')
+        create_list(:small_goal, 4, goal:)
+        expect(goal).not_to be_valid
+      end
     end
   end
 end
