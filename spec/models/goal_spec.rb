@@ -39,6 +39,21 @@ RSpec.describe Goal, type: :model do
       expect(goal).not_to be_valid
     end
 
+    it 'ベースカラーが3桁のカラーコードだと登録できないこと' do
+      goal = build(:goal, color: '#fff')
+      expect(goal).not_to be_valid
+    end
+
+    it 'ベースカラーの最初に#がなければ登録できないこと' do
+      goal = build(:goal, color: 'ff0000')
+      expect(goal).not_to be_valid
+    end
+
+    it 'ベースカラーに不正な字が入って入れば登録できないこと' do
+      goal = build(:goal, color: '#ff000G')
+      expect(goal).not_to be_valid
+    end
+
     it '終了予定日が開始日より前だと登録できないこと' do
       goal = build(:goal, schedules_end_date: Time.zone.today - 1)
       expect(goal).not_to be_valid
