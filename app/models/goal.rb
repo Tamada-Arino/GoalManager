@@ -4,9 +4,10 @@ class Goal < ApplicationRecord
   validates :title, presence: true
   validates :start_date, presence: true
   validates :color, presence: true,
-                    format: { with: /\A#(?:[0-9a-fA-F]{3}){1,2}\z/, message: :invalid_color }
+                    format: { with: /\A#[0-9a-fA-F]{6}\z/, message: :invalid_color }
   validate :start_date_check, if: :start_date
   validate :small_goals_achievable_check
+  validate :validate_small_goal_count
   after_validation :remove_small_goal_errors
 
   belongs_to :user
@@ -39,6 +40,12 @@ class Goal < ApplicationRecord
     return if end_date.blank? || small_goals.all?(&:achievable)
 
     errors.add(:end_date, :small_goals_not_achieved_yet)
+  end
+
+  def validate_small_goal_count
+    return unless small_goals.count > 3
+
+    errors.add(:base, :over_small_goals_count)
   end
 
   def remove_small_goal_errors
