@@ -67,7 +67,7 @@ RSpec.describe Goal, type: :model do
     context '小目標が存在する時' do
       it '小目標がすべて達成済みのとき終了日を入力することができる' do
         goal = build(:goal, end_date: '')
-        create_list(:small_goal, 3, goal: goal, achievable: true)
+        create_list(:small_goal, 3, goal:, achievable: true)
 
         goal.end_date = Time.zone.today
         expect(goal).to be_valid
@@ -75,8 +75,8 @@ RSpec.describe Goal, type: :model do
 
       it '小目標のうち一つでも達成できていなければ終了日を入力できない' do
         goal = build(:goal, end_date: '')
-        create(:small_goal, goal: goal, achievable: true)
-        create(:small_goal, goal: goal, achievable: false)
+        create(:small_goal, goal:, achievable: true)
+        create(:small_goal, goal:, achievable: false)
 
         goal.end_date = Time.zone.today
         expect(goal).not_to be_valid
