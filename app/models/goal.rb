@@ -4,7 +4,7 @@ class Goal < ApplicationRecord
   validates :title, presence: true
   validates :start_date, presence: true
   validates :color, presence: true,
-                    format: { with: /\A#(?:[0-9a-fA-F]{3}){1,2}\z/, message: :invalid_color }
+                    format: { with: /\A#[0-9a-fA-F]{6}\z/, message: :invalid_color }
   validate :start_date_check, if: :start_date
   validate :small_goals_achievable_check
   after_validation :remove_small_goal_errors
