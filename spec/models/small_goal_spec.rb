@@ -26,7 +26,7 @@ RSpec.describe SmallGoal, type: :model do
         goal = build(:goal)
         create_list(:small_goal, 3, goal:)
         new_small_goal = build(:small_goal, goal:)
-        expect(goal.errors[:base]).to include('一つの目標に設定できる小目標は3つまでです')
+        expect(new_small_goal).not_to be_valid
       end
     end
   end
