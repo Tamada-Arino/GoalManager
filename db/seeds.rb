@@ -58,25 +58,19 @@ goals.each do |goal|
 end
 
 # 日報作成
+base_report_attributes = {
+  target_date: Time.zone.today,
+  progress_value: 50,
+  content: ''
+}
+
 reports = [
-  {
-    target_date: Time.zone.today,
-    progress_value: 50,
-    goal_id: 1,
-    content: ''
-  },
-  {
-    target_date: Time.zone.today,
-    progress_value: 50,
-    goal_id: 2,
-    content: ''
-  },
-  {
-    target_date: Time.zone.today,
-    progress_value: 50,
-    content: '今日は過去問題を解いた。正答率は70%だった。',
-    goal_id: 3
-  }
+  base_report_attributes.merge(goal_id: 1),
+  base_report_attributes.merge(goal_id: 2),
+  base_report_attributes.merge(
+    goal_id: 3,
+    content: '今日は過去問題を解いた。正答率は70%だった。'
+  )
 ]
 
 reports.each do |report|
